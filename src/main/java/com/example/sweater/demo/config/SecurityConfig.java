@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -29,12 +30,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/resources/**","/resources/js/**").permitAll()
+                .antMatchers("/css/**", "/js/**", "**/favicon.ico").anonymous()
+                .antMatchers("/", "/index").permitAll()
                 .antMatchers("/api/v1/auth/login").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .apply(jwtConfigurer);
+                .apply(jwtConfigurer)
+                .and().formLogin().loginPage("/api/v1/auth/login").permitAll()
+                .and().logout().permitAll();
     }
 
     @Bean
@@ -45,6 +50,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     protected PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(12);
+    }
+
+    @Override
+    public void configure(WebSecurity web) {
+        web
+                .ignoring()
+                .antMatchers(
+                        "/css/",
+                        "/js/");
     }
 
 }

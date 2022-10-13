@@ -8,10 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //        (exclude = {
 //        SecurityAutoConfiguration.class
 //})
-public class BuysellApplication {
+public class BuySellApplication {
     public static void main(String[] args) {
-        SpringApplication.run(BuysellApplication.class, args);
-        System.out.println("!!!!");
+        SpringApplication.run(BuySellApplication.class, args);
     }
 }
 
