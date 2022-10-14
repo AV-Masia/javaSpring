@@ -19,7 +19,7 @@ footerTemplate.innerHTML =`
 
         a {
             margin: 0 15px;
-            color: inherit;
+            color: while;
             text-decoration: none;
         }
 

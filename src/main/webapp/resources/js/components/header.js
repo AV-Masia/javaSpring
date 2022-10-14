@@ -2,22 +2,27 @@ const headerTemplate = document.createElement('template');
 
 headerTemplate.innerHTML =`
     <style>
-        nav{
-            height: 40px;
+
+        div.wrapper {
+            height: 120px;
             display: flex;
-            aling-items: center;
+            align-items: stretch;
             justify-content: center;
             background-color: #0a0a23;
         }
+        div.information ul li{
+            list-style: none;
+            display: inline;
+            text-align: center;
 
-        ul {
-            padding: 0;
+        }
+        .login {
+            padding: 0 15px;
         }
 
         ul li {
-            list-style: none;
-            display: inline;
-        }
+            padding: 0 0 10px;
+            }
 
         a {
             font-weight: 700;
@@ -32,13 +37,33 @@ headerTemplate.innerHTML =`
         }
     </style>
     <header>
-        <nav>
-            <ul>
-                <li><a href="about.html">About</a></li>
-                <li><a href="work.html">Work</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="wrapper">
+            <div class="logo" style="flex-basis:25%">
+            </div>
+            <div class="information" style="flex-basis:50%; text-align: center" >
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class= "login" style="flex-basis:25%; text-align: right" >
+                <form class="form-login" method='Post' action="/j_spring_security_check" >
+                    <ul>
+                        <li>
+                               <label for="username"></label>
+                               <input id="username" type="text" placeholder= "login" required>
+                        </li>
+                        <li>
+                           <label for="password"></label>
+                           <input id="password" type="password" placeholder= "password" required>
+                        </li>
+                    </ul>
+                   <button class="bottom" type="submit">submit</button>
+                </form>
+            </div>
+        </div>
     </header>
 `;
 
