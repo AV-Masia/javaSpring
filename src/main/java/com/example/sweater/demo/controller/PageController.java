@@ -11,7 +11,6 @@ public class PageController {
 
     @GetMapping(value = {"/", "/index"})
     public String getIndexPage(){
-
         return "index";
     }
 
