@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // The pages does not require login
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/logout", "/index", "/registrations")
+                .antMatchers("/", "/login", "/logout", "/index", "/registration")
                 .permitAll();
 
         // /userInfo page requires login as ROLE_USER or ROLE_ADMIN.
@@ -121,8 +121,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web
             .ignoring()
             .antMatchers(
-                    "/css/",
-                    "/js/"
+                    "/css/**",
+                    "/js/**"
             );
     }
 }

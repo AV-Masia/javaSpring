@@ -22,6 +22,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+//    @GetMapping(value = {"/registration"}, path = )
+//    public void createUser(){
+//        return "registration";
+//    }
+
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -45,8 +50,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 grantedAuthorities);
     }
 
-//    @Autowired
-//    private UserRepository userRepository;
+
+
 //
 //    @Override
 //    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
