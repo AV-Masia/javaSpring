@@ -6,7 +6,7 @@ const footerCss =`
             list-style: none;
             justify-content: space-between;
             align-items: center;
-            background-color: #0a0a23;
+            background: #6bd7ce;
         }
 
         ul li {
@@ -16,7 +16,7 @@ const footerCss =`
 
         a {
             margin: 0 15px;
-            color: while;
+            color:  #545151;
             text-decoration: none;
         }
 
