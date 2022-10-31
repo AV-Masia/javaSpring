@@ -1,13 +1,99 @@
 
 const headerepeyCss = `
 
+    html {
+        margin: 0;
+        display: block;
+    }
+
+    head {
+        display: none;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font: 13px/20px 'Titillium Web',Arial;
+        font-weight: 400;
+        max-width: 100%;
+        overflow-x: hidden;
+        display: block;
+        margin: 8px;
+    }
+
+
+    #menu {
+        float: left;
+        position: relative;
+        width: 970px;
+        height: 44px;
+        background: #d96142;
+        border-top: 1px solid #d96142;
+        display: block;
+        border-bottom: 1px solid #fff;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 0 0 3px 3px;
+        font-size: 14px;
+        z-index: 500;
+    }
+
+    #menu ul {
+        width: 100%;
+        text-align: left;
+        display: inline;
+        list-style: none;
+        padding: 0;
+        margin: 1px;
+        z-index: 900;
+    }
+    #menu ul li.seviye1 {
+        font-weight: 700;
+    }
+
+    #menu ul li {
+        width: auto;
+        display: inline-block;
+        padding: 12px 10px;
+        color: #fff;
+        height: 20px;
+    }
+
+    #menu ul li a.seviye1 {
+        color: #fff;
+    }
+
+    #menu ul .ayrac {
+        font-weight: 400;
+        width: 1px;
+        height: 20px;
+        color: #fff;
+        font-size: 22px;
+    }
+
+
+    #cerceve {
+        width: 990px;
+        margin: 0 auto;
+        margin-top: 5px;
+    }
+    .cerceve {
+        float: left;
+        width: 970px;
+        background: #fff;
+        margin: 0;
+        padding: 0 10px 10px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        z-index: 9999;
+    }
      #ust {
          float: left;
          width: 970px;
          height: 40px;
          margin: 0 5px;
          padding: 10px 0 5px;
-         background: #6bd7ce;
+         background: #fff;
      }
 
      div {

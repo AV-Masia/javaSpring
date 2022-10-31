@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Index — HTML Academy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link href="/resources/css/login.css" rel="stylesheet" type="text/css">
+    <script src="/resources/js/jquery/jquery.min.js" ></script>
+    <script src="/resources/js/components/headerepey.js" type="module" defer></script>
+    <script src="/resources/js/components/footer.js" type="module" defer></script>
+</head>
+<body>
+    <header-component></header-component>
+        <main>
+            <div class="wrapper">
+                <div class="snap-drawers">
+                    <style>
+                        #giris #girisyap:hover {background:#D96142;color: #FFF;}
+                        #giris #kayitol:hover {background:#D96142;color: #FFF;}
+                        #giris {display:flex;flex-direction:column;align-items:center;justify-content:inherit;min-height:calc(100vh - 390px);}
+                        #giris .butonlar {text-align:center;padding:10px 0;margin-bottom:5px;}
+                        #giris .butonlar #girisyap {font-size:18px;font-weight:600;padding:10px 52.5px;border: 1px solid #D96142;border-radius:3px;background-color:#D96142;color:#FFF;cursor:default}
+                        #giris .butonlar #kayitol {font-size:18px;font-weight:600;padding:10px 52.5px;border: 1px solid #D96142;cursor:pointer;border-radius:3px}
+                        #giris .social-login {padding-top:20px}
+                        #giris .ayrac {margin:10px 0;}
+                        .mesaj .uyari {float:none;width:auto;}
+                        #giris .mesaj {float:none;width:auto;text-align:inherit;padding:20px 0 0 0;width:300px;}
+                        #giris {padding-top:10px;}
+                    </style>
+                    <div id="giris">
+                        <div class="butonlar">
+                            <span id="girisyap">Giriş</span>
+                            <span id="kayitol">Üye Ol</span>
+                        </div>
+                        <div class="ayrac"></div>
+                        <div id="uye_giris" class="uye_giris">
+                            <div style="display:none" class="mesaj"></div>
+                            <input id="uye_posta1" class="uye_posta uyelik_alan" type="email" name="uye_posta" placeholder="E-posta" required=""><br>
+                            <input id="uye_parola1" class="uye_parola uyelik_alan" type="password" name="uye_parola" placeholder="Şifre" required=""><br>
+                            <button class="giris epey-giris" onclick="giris()" id="adg845">Giriş</button><br>
+                            <input style="display:initial;" type="checkbox" id="beni_hatirla" name="beni_hatirla"><label style="margin-right:125px" for="beni_hatirla">Beni Hatırla</label>
+                            <a style="float:none" class="sifre_unut" href="https://www.epey.com/uye/sifirla/">Şifremi Unuttum</a><br>
+                        </div>
+                        <div style="display:none" id="kaydol" class="kaydol">
+                            <div style="display:none" class="mesaj"></div>
+                            <input id="uye_ad_soyad" class="uye_ad_soyad uyelik_alan" type="text" name="uye_ad_soyad" placeholder="Ad - Soyad" required=""><br>
+                            <input id="uye_posta" class="uye_posta uyelik_alan" type="email" name="uye_posta" placeholder="E-posta" required=""><br>
+                            <input id="uye_parola" class="uye_parola uyelik_alan" type="password" name="uye_parola" placeholder="Şifre (En az 6 Karakter)" required=""><br>
+                            <input id="uye_parola_tekrar" class="uye_parola_tekrar uyelik_alan" type="password" name="uye_parola_tekrar" placeholder="Şifre (Tekrar)" required=""><br>
+                            <img src="/captcha" alt="captcha"><br>
+                            <input id="captcha" class="uyelik_alan" type="text" name="captcha" placeholder="Doğrulama Kodu" required=""><br>
+                            <button class="uye_ol epey-giris" onclick="uyeol()" id="a5d4" type="submit">Üye Ol</button>
+                        </div>
+                    </div>
+
+                    <div id="altbarbuton">
+                        <span class="goster" onclick="kiyas('goster')"></span></div>
+                    <div id="altbar">
+                        <div id="kiyasla"></div>
+                        <span class="gizle" onclick="kiyas('gizle')"></span>
+                    </div>
+                </div>
+                <style>
+                    #cookienotice {
+                        background: #F8F4E0;
+                        position: fixed;
+                        bottom: 0;
+                        z-index: 10000;
+                        height: 50px;
+                        opacity: 0.9;
+                        padding: 10px;
+                        border-top: 1px solid #D96142;
+                    }
+                    #cookie_agree {
+                    float:right;
+                    cursor:pointer;
+                    }
+		        </style>
+                <script src="/eklenti/cookie_min.js"></script>
+                <style>.progress {height:5px;}</style>
+                <div id="sonuc"></div>
+            </div>
+        </main>
+    <footer-component></footer-component>
+</body>
+</html>

@@ -19,6 +19,12 @@ public class PageController {
         return "registration";
     }
 
+    @GetMapping(value = {"/login"})
+    public String getLogin(){
+        return "login";
+    }
+
+
     @GetMapping(value = {"/test"})
     public String getTestPage(){
         return "test";
@@ -35,3 +41,4 @@ public class PageController {
         return "index";
     }
 }
+
