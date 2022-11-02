@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")//
                 .defaultSuccessUrl("/index")//
 //                .failureUrl("/login?error=true")//
-                .failureUrl("/registration")//
+                .failureUrl("/index")//
                 .usernameParameter("username")//
                 .passwordParameter("password")
                 // Config for Logout Page

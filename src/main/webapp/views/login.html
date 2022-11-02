@@ -35,22 +35,22 @@
                             <span id="registration">Registration</span>
                         </div>
                         <div class="brace"></div>
-                        <div id="authorisation_input" class="authorisation_input">
-                            <div style="display:none" class="message"></div>
-                            <input id="member_mail1" class="member_mail membership_domain" type="email" name="member_mail" placeholder="Email" required=""><br>
-                            <input id="user_password1" class="user_password membership_domain" type="password" name="user_password" placeholder="Password" required=""><br>
-                            <button class="authorisation epey-authorisation" onclick="authorisation()" id="adg845">Input</button><br>
-                            <input style="display:initial;" type="checkbox" id="remember_me" name="remember_me"><label style="margin-right:125px" for="remember_me">Remember me</label>
-                            <a style="float:none" class="password_forget" href="http://localhost:8082/reset">I forgot my password</a><br>
-                        </div>
+                            <form method="post" action="/j_spring_security_check">
+                                <div id="authorisation_input" class="authorisation_input" >
+                                    <div style="display:none" class="message"></div>
+                                    <input id="member_mail1" class="member_mail membership_domain" type="email" name="member_mail" placeholder="Email" required=""><br>
+                                    <input id="user_password1" class="user_password membership_domain" type="password" name="user_password" placeholder="Password" required=""><br>
+                                    <button class="authorisation epey-authorisation">Input</button><br>
+                                    <input style="display:initial;" type="checkbox" id="remember_me" name="remember_me"><label style="margin-right:125px" for="remember_me">Remember me</label>
+                                    <a style="float:none" class="password_forget" href="http://localhost:8082/reset">I forgot my password</a><br>
+                                </div>
+                            </form>
                         <div style="display:none" id="register" class="register">
                             <div style="display:none" class="message"></div>
                             <input id="user_name_surname" class="user_name_surname membership_domain" type="text" name="user_name_surname" placeholder="Name surname" required=""><br>
                             <input id="member_mail" class="member_mail membership_domain" type="email" name="member_mail" placeholder="Email" required=""><br>
                             <input id="user_password" class="user_password membership_domain" type="password" name="user_password" placeholder="Password (At least 6 Characters)" required=""><br>
                             <input id="user_password_again" class="user_password_again membership_domain" type="password" name="user_password_again" placeholder="Password (Again)" required=""><br>
-                            <img src="/captcha" alt="captcha"><br>
-                            <input id="captcha" class="membership_domain" type="text" name="captcha" placeholder="Verification Code" required=""><br>
                             <button class="sign_up epey-authorisation" onclick="signup" id="a5d4" type="submit">Sign up</button>
                         </div>
                         <script>
@@ -104,7 +104,6 @@
                         cursor:pointer;
                     }
 		        </style>
-                <script src="/eklenti/cookie_min.js"></script>
                 <style>.progress {height:5px;}</style>
                 <div id="conclusion"></div>
             </div>

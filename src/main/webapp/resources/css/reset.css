@@ -82,11 +82,8 @@
         outline: 0;
     }
 
-    #membership .epey-giris {
+    #membership .quite-entry {
         background-color: #d96142;
-    }
-
-    #membership .giris, #membership .uye_ol {
         width: 300px;
         padding: 15px 10px;
         font-size: 15px;
