@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link href="/resources/css/login.css" rel="stylesheet" type="text/css">
     <script src="/resources/js/jquery/jquery.min.js" ></script>
-    <script src="/resources/js/components/headerepey.js" type="module" defer></script>
+    <script src="/resources/js/components/header.js" type="module" defer></script>
     <script src="/resources/js/components/footer.js" type="module" defer></script>
 </head>
 <body>
@@ -17,49 +17,75 @@
             <div class="wrapper">
                 <div class="snap-drawers">
                     <style>
-                        #giris #girisyap:hover {background:#D96142;color: #FFF;}
-                        #giris #kayitol:hover {background:#D96142;color: #FFF;}
-                        #giris {display:flex;flex-direction:column;align-items:center;justify-content:inherit;min-height:calc(100vh - 390px);}
-                        #giris .butonlar {text-align:center;padding:10px 0;margin-bottom:5px;}
-                        #giris .butonlar #girisyap {font-size:18px;font-weight:600;padding:10px 52.5px;border: 1px solid #D96142;border-radius:3px;background-color:#D96142;color:#FFF;cursor:default}
-                        #giris .butonlar #kayitol {font-size:18px;font-weight:600;padding:10px 52.5px;border: 1px solid #D96142;cursor:pointer;border-radius:3px}
-                        #giris .social-login {padding-top:20px}
-                        #giris .ayrac {margin:10px 0;}
-                        .mesaj .uyari {float:none;width:auto;}
-                        #giris .mesaj {float:none;width:auto;text-align:inherit;padding:20px 0 0 0;width:300px;}
-                        #giris {padding-top:10px;}
+                        #authorisation #input:hover {background:#D96142;color: #FFF;}
+                        #authorisation #registration:hover {background:#D96142;color: #FFF;}
+                        #authorisation {display:flex;flex-direction:column;align-items:center;justify-content:inherit;min-height:calc(100vh - 390px);}
+                        #authorisation .butonlar {text-align:center;padding:10px 0;margin-bottom:5px;}
+                        #authorisation .butonlar #input {font-size:18px;font-weight:600;padding:10px 52.5px;border: 1px solid #D96142;border-radius:3px;background-color:#D96142;color:#FFF;cursor:default}
+                        #authorisation .butonlar #registration {font-size:18px;font-weight:600;padding:10px 16px;boruyeder: 1px solid #D96142;cursor:pointer;border-radius:3px}
+                        #authorisation .social-login {padding-top:20px}
+                        #authorisation .brace {margin:10px 0;}
+                        .message .uyari {float:none;width:auto;}
+                        #authorisation .message {float:none;width:auto;text-align:inherit;padding:20px 0 0 0;width:300px;}
+                        #authorisation {padding-top:10px;}
                     </style>
-                    <div id="giris">
+                    <div id="authorisation">
                         <div class="butonlar">
-                            <span id="girisyap">Giriş</span>
-                            <span id="kayitol">Üye Ol</span>
+                            <span id="input">Login</span>
+                            <span id="registration">Registration</span>
                         </div>
-                        <div class="ayrac"></div>
-                        <div id="uye_giris" class="uye_giris">
-                            <div style="display:none" class="mesaj"></div>
-                            <input id="uye_posta1" class="uye_posta uyelik_alan" type="email" name="uye_posta" placeholder="E-posta" required=""><br>
-                            <input id="uye_parola1" class="uye_parola uyelik_alan" type="password" name="uye_parola" placeholder="Şifre" required=""><br>
-                            <button class="giris epey-giris" onclick="giris()" id="adg845">Giriş</button><br>
-                            <input style="display:initial;" type="checkbox" id="beni_hatirla" name="beni_hatirla"><label style="margin-right:125px" for="beni_hatirla">Beni Hatırla</label>
-                            <a style="float:none" class="sifre_unut" href="https://www.epey.com/uye/sifirla/">Şifremi Unuttum</a><br>
+                        <div class="brace"></div>
+                        <div id="authorisation_input" class="authorisation_input">
+                            <div style="display:none" class="message"></div>
+                            <input id="member_mail1" class="member_mail membership_domain" type="email" name="member_mail" placeholder="Email" required=""><br>
+                            <input id="user_password1" class="user_password membership_domain" type="password" name="user_password" placeholder="Password" required=""><br>
+                            <button class="authorisation epey-authorisation" onclick="authorisation()" id="adg845">Input</button><br>
+                            <input style="display:initial;" type="checkbox" id="remember_me" name="remember_me"><label style="margin-right:125px" for="remember_me">Remember me</label>
+                            <a style="float:none" class="password_forget" href="https://www.epey.com/uye/sifirla/">I forgot my password</a><br>
                         </div>
-                        <div style="display:none" id="kaydol" class="kaydol">
-                            <div style="display:none" class="mesaj"></div>
-                            <input id="uye_ad_soyad" class="uye_ad_soyad uyelik_alan" type="text" name="uye_ad_soyad" placeholder="Ad - Soyad" required=""><br>
-                            <input id="uye_posta" class="uye_posta uyelik_alan" type="email" name="uye_posta" placeholder="E-posta" required=""><br>
-                            <input id="uye_parola" class="uye_parola uyelik_alan" type="password" name="uye_parola" placeholder="Şifre (En az 6 Karakter)" required=""><br>
-                            <input id="uye_parola_tekrar" class="uye_parola_tekrar uyelik_alan" type="password" name="uye_parola_tekrar" placeholder="Şifre (Tekrar)" required=""><br>
+                        <div style="display:none" id="register" class="register">
+                            <div style="display:none" class="message"></div>
+                            <input id="user_name_surname" class="user_name_surname membership_domain" type="text" name="user_name_surname" placeholder="Name surname" required=""><br>
+                            <input id="member_mail" class="member_mail membership_domain" type="email" name="member_mail" placeholder="Email" required=""><br>
+                            <input id="user_password" class="user_password membership_domain" type="password" name="user_password" placeholder="Password (At least 6 Characters)" required=""><br>
+                            <input id="user_password_again" class="user_password_again membership_domain" type="password" name="user_password_again" placeholder="Password (Again)" required=""><br>
                             <img src="/captcha" alt="captcha"><br>
-                            <input id="captcha" class="uyelik_alan" type="text" name="captcha" placeholder="Doğrulama Kodu" required=""><br>
-                            <button class="uye_ol epey-giris" onclick="uyeol()" id="a5d4" type="submit">Üye Ol</button>
+                            <input id="captcha" class="membership_domain" type="text" name="captcha" placeholder="Verification Code" required=""><br>
+                            <button class="sign_up epey-authorisation" onclick="signup" id="a5d4" type="submit">Sign up</button>
                         </div>
+                        <script>
+                            $(".register").keypress(function(e) {if(e.which == 13) {signup;}});
+                            const authorisationDiv = document.getElementById('authorisation_input')
+                            const registerDiv = document.getElementById('register')
+                            const authorisationButton = document.getElementById('input')
+                            const registerButton = document.getElementById('registration')
+                               authorisationButton.addEventListener('click', function() {
+                                authorisationDiv.style.display = 'block'
+                                registerButton.style.cursor = 'pointer'
+                                registerButton.style.color = '#000'
+                                registerButton.style.backgroundColor = '#FFF'
+                                authorisationButton.style.cursor = 'default'
+                                authorisationButton.style.color = '#FFF'
+                                authorisationButton.style.backgroundColor = '#D96142'
+                                registerDiv.style.display = 'none'
+                            })
+                            registerButton.addEventListener('click', function() {
+                                authorisationDiv.style.display = 'none'
+                                authorisationButton.style.cursor = 'pointer'
+                                authorisationButton.style.color = '#000'
+                                authorisationButton.style.backgroundColor = '#FFF'
+                                registerButton.style.cursor = 'default'
+                                registerButton.style.color = '#FFF'
+                                registerButton.style.backgroundColor = '#D96142'
+                                registerDiv.style.display = 'block'
+                            })
+                        </script>
                     </div>
-
-                    <div id="altbarbuton">
-                        <span class="goster" onclick="kiyas('goster')"></span></div>
-                    <div id="altbar">
-                        <div id="kiyasla"></div>
-                        <span class="gizle" onclick="kiyas('gizle')"></span>
+                    <div id="subbarbutton">
+                        <span class="show" onclick="comparison('show')"></span></div>
+                    <div id="subbar">
+                        <div id="compared _to"></div>
+                        <span class="hide" onclick="comparison('hide')"></span>
                     </div>
                 </div>
                 <style>
@@ -74,13 +100,13 @@
                         border-top: 1px solid #D96142;
                     }
                     #cookie_agree {
-                    float:right;
-                    cursor:pointer;
+                        float:right;
+                        cursor:pointer;
                     }
 		        </style>
                 <script src="/eklenti/cookie_min.js"></script>
                 <style>.progress {height:5px;}</style>
-                <div id="sonuc"></div>
+                <div id="conclusion"></div>
             </div>
         </main>
     <footer-component></footer-component>

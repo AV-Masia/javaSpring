@@ -27,12 +27,12 @@ const footerCss =`
         align-items: center;
         background: #6bd7ce;
     }
-    #cerceve {
+    #frame {
             width: 990px;
             margin: 0 auto;
             margin-top: 5px;
     }
-    .cerceve {
+    .frame {
         float: left;
         width: 970px;
         background: #fff;

@@ -6,8 +6,8 @@ footerTemplate.innerHTML =`
     <style>`
         + footerCss +`
     </style>
-    <div id = "cerceve">
-        <div class="cerceve cerceve139">
+    <div id = "frame">
+        <div class="frame">
             <footer>
                 <ul>
                     <li><a href="about.html">About</a></li>
