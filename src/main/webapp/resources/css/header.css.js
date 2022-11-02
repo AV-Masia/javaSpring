@@ -47,6 +47,7 @@ const headerCss = `
         margin: 1px;
         z-index: 900;
     }
+
     #menu ul li.level {
         font-weight: 700;
     }
@@ -71,12 +72,12 @@ const headerCss = `
         font-size: 22px;
     }
 
-
     #frame {
         width: 990px;
         margin: 0 auto;
         margin-top: 5px;
     }
+
     .frame {
         float: left;
         width: 970px;
@@ -87,6 +88,7 @@ const headerCss = `
         -webkit-border-radius: 3px;
         z-index: 9999;
     }
+
      #ust {
          float: left;
          width: 970px;
@@ -109,6 +111,7 @@ const headerCss = `
          text-decoration: none;
          color: #000;
      }
+
      #search-box {
          float: left;
          width: 650px;
@@ -163,9 +166,6 @@ const headerCss = `
         -webkit-border-radius: 3px;
     }
 
-
-
-
      #search-box .callconclusion {
          float: left;
          width: 580px;
@@ -212,6 +212,7 @@ const headerCss = `
          font-size: 16px;
          font-weight: 700;
      }
+
      .panelliste span {
          display: block;
          font-size: 12px;

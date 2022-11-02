@@ -24,6 +24,11 @@ public class PageController {
         return "login";
     }
 
+    @GetMapping(value = {"/reset"})
+    public String getReset(){
+        return "reset";
+    }
+
 
     @GetMapping(value = {"/test"})
     public String getTestPage(){

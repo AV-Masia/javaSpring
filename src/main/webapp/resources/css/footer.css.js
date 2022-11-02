@@ -18,6 +18,7 @@ const footerCss =`
         display: block;
         margin: 8px;
     }
+
     footer {
         height: 60px;
         padding: 0 10px;
@@ -27,11 +28,13 @@ const footerCss =`
         align-items: center;
         background: #6bd7ce;
     }
+
     #frame {
             width: 990px;
             margin: 0 auto;
             margin-top: 5px;
     }
+
     .frame {
         float: left;
         width: 970px;
