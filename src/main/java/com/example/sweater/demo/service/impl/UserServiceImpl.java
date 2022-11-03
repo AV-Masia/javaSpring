@@ -7,6 +7,7 @@ import com.example.sweater.demo.repository.UserRepository;
 import com.example.sweater.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     private UserRepository userRepository;
+
+    public UserServiceImpl() {
+        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    }
 
     @Override
     public User getUserByEmail(String email) {
@@ -29,7 +36,7 @@ public class UserServiceImpl implements UserService {
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
                 .email(userDto.getEmail())
-                .password(userDto.getPassword())
+                .password(bCryptPasswordEncoder.encode(userDto.getPassword()))
                 .role(Role.USER)
                 .build();
         userRepository.save(user);

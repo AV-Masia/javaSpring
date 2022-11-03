@@ -20,7 +20,7 @@ public class UserController {
     public String  regUserForm(@ModelAttribute(value = "UserDto") UserDTO userDto) {
 //        log.info("UserDto send to createUserFromUser, userDTO= " + userDto);
         userService.createUserFromUserDTO(userDto);
-        return "redirect:/secure/getUsersNotCustomer";
+        return "redirect:/index";
     }
 
 }

@@ -15,7 +15,43 @@
 <body>
     <header-component></header-component>
         <main>
-            <h1>Что-то</h1><!-- some content -->
+            <div class="collapse navbar-collapse" >
+                <ul class="nav navbar-nav">
+                    <li><a href=" <c:url value="/index" />Home</a></li>
+
+                    <li><a href=" <c:url value="/getAllProductsEnabled/0" />">Product List</a></li>
+
+                    <security:authorize access="hasAnyRole({'ROLE_ADMIN','ROLE_MANAGER'})">
+
+
+                        <li>
+                            <a href=" <c:url value="/admin/product/getProductsDisabled" />">
+                            Products disabled</a>
+                        </li>
+                    </security:authorize>
+
+                    <security:authorize access="hasAnyRole({'ROLE_ADMIN','ROLE_MANAGER'})">
+                        <li>
+                            <a href=" <c:url value="/admin/product/addProduct" />">
+                            Add Product</a>
+                        </li>
+                    </security:authorize>
+
+                    <security:authorize access="hasAnyRole({'ROLE_ADMIN','ROLE_MANAGER'})">
+                        <li>
+                            <a href=" <c:url value="/admin/getAllCustomers" />">
+                            List Customers</a>
+                        </li>
+                    </security:authorize>
+
+                    <security:authorize access="hasAnyRole({'ROLE_ADMIN','ROLE_MANAGER'})">
+                        <li>
+                            <a href=" <c:url value="/admin/getAllOrders" />">
+                            List All Orders</a>
+                        </li>
+                    </security:authorize>
+
+                </ul>
         </main>
     <footer-component></footer-component>
 </body>

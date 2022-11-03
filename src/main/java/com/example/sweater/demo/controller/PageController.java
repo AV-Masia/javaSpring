@@ -14,11 +14,6 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping(value = {"/registration"})
-    public String createUser(){
-        return "registration";
-    }
-
     @GetMapping(value = {"/login"})
     public String getLogin(){
         return "login";

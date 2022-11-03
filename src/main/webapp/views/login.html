@@ -45,14 +45,17 @@
                                     <a style="float:none" class="password_forget" href="http://localhost:8082/reset">I forgot my password</a><br>
                                 </div>
                             </form>
-                        <div style="display:none" id="register" class="register">
-                            <div style="display:none" class="message"></div>
-                            <input id="user_name_surname" class="user_name_surname membership_domain" type="text" name="user_name_surname" placeholder="Name surname" required=""><br>
-                            <input id="member_mail" class="member_mail membership_domain" type="email" name="member_mail" placeholder="Email" required=""><br>
-                            <input id="user_password" class="user_password membership_domain" type="password" name="user_password" placeholder="Password (At least 6 Characters)" required=""><br>
-                            <input id="user_password_again" class="user_password_again membership_domain" type="password" name="user_password_again" placeholder="Password (Again)" required=""><br>
-                            <button class="sign_up epey-authorisation" onclick="signup" id="a5d4" type="submit">Sign up</button>
-                        </div>
+                        <form method="post" action="/registration">
+                            <div style="display:none" id="register" class="register">
+                                <div style="display:none" class="message"></div>
+                                <input id="firstName" class="user_first_name membership_domain" type="text" name="firstName" placeholder="First name" required=""><br>
+                                <input id="lastName" class="user_last_name membership_domain" type="text" name="lastName" placeholder="Last name" required=""><br>
+                                <input id="email" class="member_mail membership_domain" type="email" name="email" placeholder="Email" required=""><br>
+                                <input id="password" class="user_password membership_domain" type="password" name="password" placeholder="Password (At least 6 Characters)" required=""><br>
+                                <input id="password2" class="user_password_again membership_domain" type="password" name="password2" placeholder="Password (Again)" required=""><br>
+                                <button class="sign_up epey-authorisation" type="submit">Sign up</button>
+                            </div>
+                        </form>
                         <script>
                             $(".register").keypress(function(e) {if(e.which == 13) {signup;}});
                             const authorisationDiv = document.getElementById('authorisation_input')
