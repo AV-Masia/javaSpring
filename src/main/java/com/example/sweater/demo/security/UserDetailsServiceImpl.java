@@ -44,20 +44,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.isAccountNonLocked(),
                 grantedAuthorities);
     }
-
-//    @Autowired
-//    private UserRepository userRepository;
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        User user = userRepository.findByEmail(email).orElseThrow(() -> {
-//            System.out.println("new UsernameNotFoundException(\"none exist: \")" + email);
-//            return new UsernameNotFoundException("none exist: " + email);
-//        });
-//
-//        return SecurityUser.fromUser(user);
-////        return Optional.of(userRepository.findByEmail(username).get()).stream()
-////                .map(SecurityUser::fromUser)
-////                .findFirst().get();
-//    }
 }

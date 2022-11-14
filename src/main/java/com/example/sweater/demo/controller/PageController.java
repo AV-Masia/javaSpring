@@ -9,9 +9,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PageController {
 
-    @GetMapping(value = {"/", "/index"})
+    @GetMapping(value = {"/", "/index", "/index.html"})
     public String getIndexPage(){
         return "index";
+    }
+
+    @GetMapping(value = {"/login.html"})
+    public String getLogin(){
+        return "login";
+    }
+
+    @GetMapping(value = {"/header.html"})
+    public String getHeader(){
+        return "structure/header";
+    }
+
+    @GetMapping(value = {"/footer.html"})
+    public String getFooter(){
+        return "structure/footer";
     }
 
     @GetMapping(value = {"/test"})
@@ -30,3 +45,4 @@ public class PageController {
         return "index";
     }
 }
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=http://www.thymeleaf.org
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec=http://www.thymeleaf.org/extras/spring-security>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+        <link th:href="@{/css/header.css}" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header>
+            <div id="frame">
+                <div class="frame">
+                    <div id="ust">
+                        <div id="logo">
+                            <a href = "http://localhost:8082/index.html">
+                                <img alt="Epey Logo" src="https://resim.epey.com/tema/logo.png"></a>
+                        </div>
+                        <div id="search-box" class="search-key-box">
+                            <form action="  " method="get">
+                                <input aria-label="call" class="call general_call" type="text" value="" name="search" autocomplete="off" placeholder="sitede search" >
+                                <input type="hidden" name="floor" value="">
+                                <input type="submit" class="search" value="">
+                            </form>
+                            <div class="callconclusion general_conclusion"></div>
+                        </div>
+                        <div id="user_panel">
+                            <div class="panelliste">
+                                <div sec:authorize="!isFullyAuthenticated()">
+                                    <a href="http://localhost:8082/login.html">
+                                        <span class="sp1">Login</span>
+                                    </a>
+                                </div>
+                                <div sec:authorize="isFullyAuthenticated()">
+                                    <a href="/logout ">
+                                        <span class="sp1">Logout</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menu">
+                        <ul>
+                            <li class="level">
+                            <span class="s1">
+                                <a href="https://www.epey.com/akilli-telefonlar/" title="PAGE1" class="level">TELEFON</a>
+                            </span>
+                            </li>
+                            <span class="brace">|</span>
+                            <li class="level">
+                            <span class="s1">
+                                <a href="https://www.epey.com/akilli-telefonlar/" title="PAGE2" class="level">TELEFON</a>
+                            </span>
+                            </li>
+                            <span class="brace">|</span>
+                            <li  class="level">
+                            <span class="s1">
+                                <a href="https://www.epey.com/akilli-telefonlar/" title="PAGE3" class="level" th:text='hello'></a>
+                            </span>
+                            </li>
+                            <span class="brace">|</span>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </body>
+</html>
+
+<!--<script>-->
+<!--    var extern = document.getElementsByTagName("footer")[0].import;-->
+<!--</script>-->

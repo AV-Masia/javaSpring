@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Index — HTML Academy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link href="/resources/css/reset.css" rel="stylesheet" type="text/css">
+    <script src="/resources/js/jquery/jquery.min.js" ></script>
+    <script src="/resources/js/components/header.js" type="module" defer></script>
+    <script src="/resources/js/components/footer.js" type="module" defer></script>
+</head>
+<body>
+    <header-component></header-component>
+        <main>
+            <div id="membership">
+                <div id="reset">
+                    <h1>Forgot Password / Membership Verification</h1>
+                    <div class="message">Enter your registered e-mail address to set a new password or verify membership.
+                        <br>We will send the password change or verification link to your e-mail address.</div>
+                    <input class="email membership_area" type="email" name="email" placeholder="email" required="" value=""><br>
+                    <input class="entry quite-entry" onclick="reset('mail')" type="submit" name="reset" value="Send"><br>
+                </div>
+            </div>
+        </main>
+    <footer-component></footer-component>
+</body>
+</html>

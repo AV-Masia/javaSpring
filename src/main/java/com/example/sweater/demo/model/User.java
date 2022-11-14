@@ -27,9 +27,7 @@ public class User implements Serializable {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
     private Role role;
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "status")
-    private Status status;
+
 
     @Builder.Default
     private boolean enabled = true;
@@ -39,4 +37,7 @@ public class User implements Serializable {
     private boolean credentialsNonExpired = true;
     @Builder.Default
     private boolean accountNonLocked = true;
+
+
+
 }
