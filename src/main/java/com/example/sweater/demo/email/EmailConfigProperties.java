@@ -16,7 +16,7 @@ public class EmailConfigProperties {
 
     @Getter
     @Setter
-    private class Register {
+    public static class Register {
         private String subject;
         private String message;
     }

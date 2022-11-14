@@ -7,7 +7,7 @@ headerTemplate.innerHTML =`
      <style>`
         + headerCss +
     `</style>
-        <div id="frame">
+        <div id="frame" xmlns:th=http://www.thymeleaf.org>
             <div class="frame">
                 <div id="ust">
                     <div id="logo">
@@ -24,7 +24,7 @@ headerTemplate.innerHTML =`
                     </div>
                     <div id="user_panel">
                         <div class="panelliste">
-                            <a href="http://localhost:8082/login ">
+                            <a href="http://localhost:8082/login.html">
                                 <div class="descikon"></div>
                                 <span class="sp1">Login</span>
                             </a>
@@ -50,7 +50,7 @@ headerTemplate.innerHTML =`
                         <span class="brace">|</span>
                         <li  class="level">
                             <span class="s1">
-                                <a href="https://www.epey.com/akilli-telefonlar/" title="PAGE3" class="level">TELEFON</a>
+                                <a href="https://www.epey.com/akilli-telefonlar/" title="PAGE3" class="level" th:text='hello'></a>
                             </span>
                         </li>
                         <span class="brace">|</span>

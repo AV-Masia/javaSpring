@@ -25,16 +25,16 @@ public class AuthenticationRestControllerV1 {
 //    public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequestDTO request){
 //        try {
 //            String email = request.getUsername();
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, request.getPassword()));
+//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(eemail, request.getPassword()));
 ////            User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User doesn't exist: " + email));
 ////            String token = jwtTokenProvider.createToken(email, user.getRole().name());
 //            Map<Object, Object> response = new HashMap<>();
-//            response.put("email", email);
+//            response.put("eemail", eemail);
 ////            response.put("token", token);
 //
 //            return ResponseEntity.ok(response);
 //        } catch (AuthenticationException e) {
-//            return  new ResponseEntity<>("Invalid email/password combination: " + request.getUsername(), HttpStatus.FORBIDDEN);
+//            return  new ResponseEntity<>("Invalid eemail/password combination: " + request.getUsername(), HttpStatus.FORBIDDEN);
 //        }
 //    }
 //

@@ -1,5 +1,6 @@
 package com.example.sweater.demo.service.impl;
 
+import com.example.sweater.demo.email.EmailService;
 import com.example.sweater.demo.model.Role;
 import com.example.sweater.demo.model.User;
 import com.example.sweater.demo.model.dto.UserDTO;
@@ -15,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private EmailService emailService;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -40,6 +44,13 @@ public class UserServiceImpl implements UserService {
                 .role(Role.USER)
                 .build();
         userRepository.save(user);
+        try {
+            emailService.sendRegister(
+                    userDto.getFirstName() + " " + userDto.getLastName(),
+                    userDto.getEmail());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         log.info("Create user from userDTO, user= " + user);
     }
 }

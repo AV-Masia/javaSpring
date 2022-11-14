@@ -1,16 +1,14 @@
 
-const headerCss = `
-
-    html {
+    #header html {
         margin: 0;
         display: block;
     }
 
-    head {
+    #header head {
         display: none;
     }
 
-    body {
+    #header body {
         margin: 0;
         padding: 0;
         font: 13px/20px 'Titillium Web',Arial;
@@ -22,7 +20,7 @@ const headerCss = `
     }
 
 
-    #menu {
+    #header #menu {
         float: left;
         position: relative;
         width: 970px;
@@ -38,7 +36,7 @@ const headerCss = `
         z-index: 500;
     }
 
-    #menu ul {
+    #header #menu ul {
         width: 100%;
         text-align: left;
         display: inline;
@@ -48,11 +46,11 @@ const headerCss = `
         z-index: 900;
     }
 
-    #menu ul li.level {
+    #header #menu ul li.level {
         font-weight: 700;
     }
 
-    #menu ul li {
+    #header #menu ul li {
         width: auto;
         display: inline-block;
         padding: 12px 10px;
@@ -60,11 +58,11 @@ const headerCss = `
         height: 20px;
     }
 
-    #menu ul li a.level {
+    #header #menu ul li a.level {
         color: #fff;
     }
 
-    #menu ul .brace {
+    #header #menu ul .brace {
         font-weight: 400;
         width: 1px;
         height: 20px;
@@ -72,13 +70,13 @@ const headerCss = `
         font-size: 22px;
     }
 
-    #frame {
+    #header #frame {
         width: 990px;
         margin: 0 auto;
         margin-top: 5px;
     }
 
-    .frame {
+    #header .frame {
         float: left;
         width: 970px;
         background: #fff;
@@ -89,7 +87,7 @@ const headerCss = `
         z-index: 9999;
     }
 
-     #ust {
+     #header #ust {
          float: left;
          width: 970px;
          height: 40px;
@@ -98,21 +96,21 @@ const headerCss = `
          background: #fff;
      }
 
-     div {
+     #header div {
          display: block;
      }
 
-     #logo {
+     #header #logo {
          float: left;
          margin: 3px 0 0 15px;
      }
 
-     a {
+     #header a {
          text-decoration: none;
          color: #000;
      }
 
-     #search-box {
+     #header #search-box {
          float: left;
          width: 650px;
          height: 40px;
@@ -125,27 +123,27 @@ const headerCss = `
          background: #e9e8e8;
      }
 
-     .search-key-box {
+     #header .search-key-box {
          z-index: 1000;
      }
 
-     script {
+     #header script {
          display: none;
      }
 
-     form {
+     #header form {
          display: block;
          margin-top: 0em;
      }
 
-    #search-box .call {
+    #header #search-box .call {
         width: 559px;
         font-size: 15px;
         margin-top: 4px;
         font: bold 13px/20px 'Titillium Web',Arial;
     }
     
-     #search-box .search {
+     #header #search-box .search {
          width: 70px;
          height: 38px;
          background: url(https://resim.epey.com/tema/aratmp.png) no-repeat center #d96142;
@@ -155,7 +153,7 @@ const headerCss = `
          border-radius: 0 3px 3px 0;
      }
 
-    #search-box input {
+    #header #search-box input {
         float: left;
         padding: 7px 10px;
         border: none;
@@ -166,14 +164,14 @@ const headerCss = `
         -webkit-border-radius: 3px;
     }
 
-     #search-box .callconclusion {
+     #header #search-box .callconclusion {
          float: left;
          width: 580px;
          position: relative;
          z-index: 100000;
      }
 
-     #user_panel {
+     #header #user_panel {
          position: relative;
          width: 102px;
          height: 36px;
@@ -184,11 +182,11 @@ const headerCss = `
          background: url(https://resim.epey.com/tema/user.png) 5px 10px no-repeat;
      }
 
-     .panelliste {
+     #header .panelliste {
          font-size: 15px;
      }
 
-     #user_panel {
+     #header #user_panel {
          position: relative;
          width: 102px;
          height: 36px;
@@ -200,7 +198,7 @@ const headerCss = `
          background: url(https://resim.epey.com/tema/user.png) 5px 10px no-repeat;
      }
 
-     .panelliste .descikon {
+     #header .panelliste .descikon {
          float: right;
          width: 25px;
          height: 17px;
@@ -208,24 +206,20 @@ const headerCss = `
          margin: 10px 0 0;
      }
 
-     .panelliste span.sp1 {
+     #header .panelliste span.sp1 {
          font-size: 16px;
          font-weight: 700;
      }
 
-     .panelliste span {
+     #header .panelliste span {
          display: block;
          font-size: 12px;
          line-height: 17px;
      }
 
-     .panelliste span {
+     #header .panelliste span {
          display: block;
          font-size: 12px;
          line-height: 17px;
      }
-
-`
-
-export default headerCss;
 

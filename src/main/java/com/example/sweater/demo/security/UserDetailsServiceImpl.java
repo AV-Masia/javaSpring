@@ -22,11 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userService;
 
-//    @GetMapping(value = {"/registration"}, path = )
-//    public void createUser(){
-//        return "registration";
-//    }
-
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -49,20 +44,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.isAccountNonLocked(),
                 grantedAuthorities);
     }
-
-
-
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        User user = userRepository.findByEmail(email).orElseThrow(() -> {
-//            System.out.println("new UsernameNotFoundException(\"none exist: \")" + email);
-//            return new UsernameNotFoundException("none exist: " + email);
-//        });
-//
-//        return SecurityUser.fromUser(user);
-////        return Optional.of(userRepository.findByEmail(username).get()).stream()
-////                .map(SecurityUser::fromUser)
-////                .findFirst().get();
-//    }
 }

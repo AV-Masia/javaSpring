@@ -28,6 +28,7 @@ public class User implements Serializable {
     @Column(name = "role")
     private Role role;
 
+
     @Builder.Default
     private boolean enabled = true;
     @Builder.Default
