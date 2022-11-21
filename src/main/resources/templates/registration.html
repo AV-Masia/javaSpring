@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th=http://www.thymeleaf.org
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec=http://www.thymeleaf.org/extras/spring-security>
-<html lang="en">
+      xmlns:sec=http://www.thymeleaf.org/extras/spring-security
+      xmlns:form=http://www.springframework.org/tags/form>
+
 <head>
     <title>Registration</title>
     <meta charset="UTF-8">
@@ -11,63 +12,70 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-          crossorigin="anonymous" />
-    <link th:href="@{/css/global.css}" rel="stylesheet" type="text/css"/>
-<!--    <link th:href="@{/css/registration.css}" rel="stylesheet" type="text/css"/>-->
+          crossorigin="anonymous"/>
+    <link th:href="@{/css/auth.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/auth-registration.css}" rel="stylesheet" type="text/css"/>
     <script th:src="@{//cdnjs.cloudflare.com/ajax/libs/polymer/0.3.3/platform.js}" type="text/javascript"></script>
     <script th:src="@{/js/global.js}" type="text/javascript"></script>
     <script th:src="@{/js/jquery/jquery.min.js}" type="text/javascript"></script>
     <script>
-            $(function(){
-              $("#header").load("./header.html");
-              $("#footer").load("./footer.html");
-            });
-        </script>
+        $(function(){
+          $("#header").load("./header.html");
+          $("#footer").load("./footer.html");
+        });
+    </script>
 </head>
 <body>
 <div id="header"></div>
 <main>
-    <div class= "registration"  >
-        <form class="form-registration" method='Post' action="/j_spring_security_check" >
-
-            <div class= "login" >
-                <form class="form-login" method='Post' action="/j_spring_security_check" >
-                    <ul>
-                        <li>
-                            <label for="username"></label>
-                            <input id="username" type="text" placeholder= "login" required>
-                        </li> 
-                        <li>
-                            <label for="password_login"></label>
-                            <input id="password_login" type="password" placeholder= "password" required>
-                        </li>
-                    </ul>
-                    <button class="bottom" type="submit">submit</button>
-
-
-                    <ul>
-                        <li>
-                            <label for="firstName"></label>
-                            <input id="firstName" type="text" placeholder= "first name" required>
-                        </li>
-                        <li>
-                            <label for="lastName"></label>
-                            <input id="lastName" type="text" placeholder= "last name" required>
-                        </li>
-                        <li>
-                            <label for="email"></label>
-                            <input id="email" type="text" placeholder= "email" required>
-                        </li>
-                        <li>
-                            <label for="password_registration"></label>
-                            <input id="password_registration" type="password" placeholder= "password" required>
-                        </li>
-
-                    </ul>
-                    <button class="bottom" type="submit">submit</button>
+    <div class="wrapper">
+        <div class="snap-drawers">
+            <div id="authorisation">
+                <div class="butonlar">
+                    <a href="/login.html">
+                        <span id="input">Login</span>
+                    </a>
+                    <span id="registration">Registration</span>
+                </div>
+                <div class="brace"></div>
+                <form th:action="@{/registration.html}" th:object="${registrationForm}" method="post" enctype="multipart/form-data">
+                    <div id="register" class="register">
+                        <div style="display:none" class="message"></div>
+                        <input class="user_first_name membership_domain" type="text" th:field="*{firstName}"
+                               placeholder="First name" ><br>
+                        <p th:if="${#fields.hasErrors('firstName')}"
+                           th:errorclass="error"
+                            th:errors="*{firstName}" ></p>
+                        <input class="user_last_name membership_domain" type="text" th:field="*{lastName}"
+                               placeholder="Last name" ><br>
+                        <p th:if="${#fields.hasErrors('lastName')}"
+                           th:errorclass="error"
+                           th:errors="*{lastName}" ></p>
+                        <input class="member_mail membership_domain" type="email" th:field="*{email}" placeholder="Email" ><br>
+                        <p th:if="${#fields.hasErrors('email')}"
+                           th:errorclass="error"
+                           th:errors="*{email}"></p>
+                        <input class="user_password membership_domain" type="password" th:field="*{password}"
+                               placeholder="Password (At least 6 Characters)" ><br>
+                        <p th:if="${#fields.hasErrors('password')}"
+                           th:errorclass="error"
+                           th:errors="*{password}" ></p>
+                        <input class="user_password_again membership_domain" type="password" th:field="*{confirmPassword}"
+                               placeholder="Password (At least 6 Characters)" ><br>
+                        <p th:if="${#fields.hasErrors('confirmPassword')}"
+                           th:errorclass="error"
+                           th:errors="*{confirmPassword}" ></p>
+                        <button class="sign_up epey-authorisation" type="submit">Sign up</button>
+                    </div>
                 </form>
             </div>
-        </form>
+            <div id="subbarbutton">
+                <span class="show" onclick="comparison('show')"></span></div>
+            <div id="subbar">
+                <div id="compared _to"></div>
+                <span class="hide" onclick="comparison('hide')"></span>
+            </div>
+        </div>
     </div>
 </main>
 <div id="footer"></div>

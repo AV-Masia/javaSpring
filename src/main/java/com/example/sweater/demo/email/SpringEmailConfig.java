@@ -37,6 +37,7 @@ public class SpringEmailConfig {
     private ITemplateResolver htmlTemplateResolver() {
         final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setOrder(1);
+        templateResolver.setName("reg");
         templateResolver.setCheckExistence(true);
         templateResolver.setResolvablePatterns(Collections.singleton("email-*"));
         templateResolver.setPrefix("/email/");
