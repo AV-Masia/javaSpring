@@ -14,10 +14,10 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping(value = {"/login.html"})
-    public String getLogin(){
-        return "login";
-    }
+//    @GetMapping(value = {"/login.html"})
+//    public String getLogin(){
+//        return "login";
+//    }
 
     @GetMapping(value = {"/header.html"})
     public String getHeader(){
@@ -29,20 +29,16 @@ public class PageController {
         return "structure/footer";
     }
 
-    @GetMapping(value = {"/test"})
-    public String getTestPage(){
-        return "test";
+    @GetMapping(value = {"/reset.html"})
+    public String getReset(){
+        return "reset";
     }
 
-    @RequestMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error,
-                        @RequestParam(value = "logout", required = false) String logout, Model model) {
+    @RequestMapping("/login.html")
+    public String login(@RequestParam(value = "error", required = false) String error,Model model) {
         if (error != null)
-            model.addAttribute("error", "Invalid username and Password");
-        if (logout != null){
-            model.addAttribute("logout", "You have logged out successfully");
-        }
-        return "index";
+            model.addAttribute("error1", true);
+        return "login";
     }
 }
 

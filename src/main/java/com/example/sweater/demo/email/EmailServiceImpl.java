@@ -16,7 +16,7 @@ import java.util.Locale;
 
 
 @Service
-public class EmailServiceImpl implements EmailService  {
+public class EmailServiceImpl implements EmailService {
 
     private final String EMAIL_TEMPLATE_ENCODING = StandardCharsets.UTF_8.name();
 
@@ -25,6 +25,9 @@ public class EmailServiceImpl implements EmailService  {
 
     @Autowired
     private TemplateEngine emailTemplateEngine;
+
+//    @Autowired
+//    SpringEmailConfig springEmailConfig;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -53,5 +56,31 @@ public class EmailServiceImpl implements EmailService  {
         }
         this.mailSender.send(mimeMessage);
 
+    }
+
+    @Override
+    public void sendPassword(String firstName, String lastName, String email, String password) {
+
+        Locale locale = Locale.ENGLISH;
+        final Context ctx = new Context(locale);
+        ctx.setVariable("firstName", firstName);
+        ctx.setVariable("lastName", lastName);
+        ctx.setVariable("password", password);
+
+        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+        final MimeMessageHelper mimeMessageHelper;
+        try {
+            mimeMessageHelper = new MimeMessageHelper(mimeMessage,
+                    MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, EMAIL_TEMPLATE_ENCODING);
+            mimeMessageHelper.setSubject(emailConfigProperties.getReset().getSubject()[0]);
+            mimeMessageHelper.setFrom(emailConfigProperties.getFrom());
+            mimeMessageHelper.setTo(email);
+            final String htmlContent = emailTemplateEngine.process(
+                    emailConfigProperties.getReset().getMessage()[0], ctx);
+            mimeMessageHelper.setText(htmlContent, true);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        this.mailSender.send(mimeMessage);
     }
 }

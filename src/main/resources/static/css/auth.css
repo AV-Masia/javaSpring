@@ -275,3 +275,39 @@
         border-color: buttonborder;
         border-image: initial;
     }
+
+     #authorisation {
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:inherit;
+        min-height:calc(100vh - 390px);
+    }
+     #authorisation .butonlar {
+        text-align:center;
+        padding:10px 0;
+        margin-bottom:5px;
+    }
+     #authorisation .social-login {
+        padding-top:20px
+    }
+     #authorisation .brace {
+        margin:10px 0;
+    }
+     .message .uyari {
+        float:none;
+        width:auto;
+    }
+     #authorisation .message {
+        float:none;
+        width:auto;
+        text-align:inherit;
+        padding:20px 0 0 0;
+        width:300px;
+    }
+     #authorisation {
+        padding-top:10px;
+    }
+    .error {
+        color: red;
+    }

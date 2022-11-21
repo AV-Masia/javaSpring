@@ -13,11 +13,19 @@ public class EmailConfigProperties {
     private String from;
 
     private Register register = new Register();
+    private Reset reset = new Reset();
 
     @Getter
     @Setter
-    public static class Register {
+    public class Register{
         private String subject;
         private String message;
+    }
+
+    @Getter
+    @Setter
+    public class Reset{
+        private String [] subject;
+        private String [] message;
     }
 }
