@@ -41,7 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // The pages does not require login
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/logout", "/index", "/header", "/registration", "/reset").permitAll()
+                .antMatchers("/", "/login", "/logout", "/index", "/header", "/registration", "/user").permitAll()
+                .antMatchers("/deleteUser").hasAuthority("USER")
                 .antMatchers( "/public/**","/templates/structure/**").permitAll()
                         .antMatchers("/resources/**","/resources/js/**","/resources/css/**").permitAll()
                         .antMatchers("/css/**", "/js/**", "**/favicon.ico").permitAll();
@@ -53,13 +54,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Submit URL of login page.
                 .loginProcessingUrl("/j_spring_security_check") // Submit URL
                 .loginPage("/login")
-                .defaultSuccessUrl("/index.html")
                 .failureUrl("/login.html?error=true")
-//                .failureUrl("/login.html")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/index");
+                .logout()
+                .logoutUrl("/logout").logoutSuccessUrl("/index");
 //                                       .anyRequest()
 //                            .authenticated()
 //                            .and()

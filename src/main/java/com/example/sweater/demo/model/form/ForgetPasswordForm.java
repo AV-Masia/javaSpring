@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(access = AccessLevel.PUBLIC)
-//@Builder(access = AccessLevel.PUBLIC, toBuilder = true)
 public class ForgetPasswordForm {
 
     private String email;

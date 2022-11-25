@@ -44,4 +44,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.isAccountNonLocked(),
                 grantedAuthorities);
     }
+
 }
