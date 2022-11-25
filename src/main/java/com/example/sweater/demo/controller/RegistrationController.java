@@ -29,7 +29,6 @@ public class RegistrationController {
     }
 
     @GetMapping("/registration.html")
-//    public String getRegistrationForm() {
     public String getRegistrationForm(Model model) {
         RegistrationForm registrationForm = new RegistrationForm();
         model.addAttribute("registrationForm", registrationForm);

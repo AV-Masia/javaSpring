@@ -68,6 +68,23 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateUser(Long id, RegistrationForm registrationForm) {
+        User user = getUserById(id);
+        user.setFirstName(registrationForm.getFirstName());
+        user.setLastName(registrationForm.getLastName());
+        user.setEmail(registrationForm.getEmail());
+        if (!registrationForm.getPassword().isEmpty()){
+            user.setPassword(bCryptPasswordEncoder.encode(registrationForm.getPassword()));
+        }
+        userRepository.save(user);
+    }
+
     public static String generateRandomPassword() {
         int len = 10;
         return RandomStringUtils.randomAlphanumeric(len);

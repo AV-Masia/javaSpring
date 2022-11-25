@@ -14,11 +14,6 @@ public class PageController {
         return "index";
     }
 
-//    @GetMapping(value = {"/login.html"})
-//    public String getLogin(){
-//        return "login";
-//    }
-
     @GetMapping(value = {"/header.html"})
     public String getHeader(){
         return "structure/header";
@@ -35,7 +30,7 @@ public class PageController {
     }
 
     @RequestMapping("/login.html")
-    public String login(@RequestParam(value = "error", required = false) String error,Model model) {
+    public String login(@RequestParam(value = "error", required = false) String error, Model model) {
         if (error != null)
             model.addAttribute("error1", true);
         return "login";

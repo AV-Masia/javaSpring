@@ -8,13 +8,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+
     User findByEmail(String email);
     User getById(Long id);
 
-//    void updateUser(User user);
     @Transactional
     @Modifying
     @Query(value = "UPDATE users SET password =?2 WHERE id=?1", nativeQuery = true)
     void  updateUserPassword(Long id, String password);
+
+    @Transactional
+    @Modifying
+    User save(User user);
 
 }

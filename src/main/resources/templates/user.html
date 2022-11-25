@@ -3,8 +3,9 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec=http://www.thymeleaf.org/extras/spring-security
       xmlns:form=http://www.springframework.org/tags/form>
+
     <head>
-        <title>Registration</title>
+        <title>User</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,7 +14,7 @@
               integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
               crossorigin="anonymous"/>
         <link th:href="@{/css/auth.css}" rel="stylesheet" type="text/css"/>
-        <link th:href="@{/css/auth-registration.css}" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/css/user.css}" rel="stylesheet" type="text/css"/>
         <script th:src="@{//cdnjs.cloudflare.com/ajax/libs/polymer/0.3.3/platform.js}" type="text/javascript"></script>
         <script th:src="@{/js/global.js}" type="text/javascript"></script>
         <script th:src="@{/js/jquery/jquery.min.js}" type="text/javascript"></script>
@@ -29,31 +30,27 @@
         <main>
             <div class="wrapper">
                 <div class="snap-drawers">
-                    <div id="authorisation">
-                        <div class="butonlar">
-                            <a href="/login.html">
-                                <span id="input">Login</span>
-                            </a>
-                            <span id="registration">Registration</span>
-                        </div>
-                        <div class="brace"></div>
-                        <form th:action="@{/registration.html}" th:object="${registrationForm}" method="post" enctype="multipart/form-data">
-                            <div id="register" class="register">
-                                <div style="display:none" class="message"></div>
-                                <input class="user_first_name membership_domain" type="text" th:field="*{firstName}"
-                                       placeholder="First name" ><br>
+                    <div id="user_page">
+                        <div id = "brace-1" class="brace"></div>
+                        <form th:action="@{/user.html}" th:object="${registrationForm}" method="post" userId="${registrationForm.id}" enctype="multipart/form-data">
+                            <input type="text" th:field="*{id}" style="display: none">
+                            <div id="user_information" class="user_information">
+                                <p>First name</p>
+                                <input class="user_first_name membership_domain" type="text" th:field="*{firstName}"><br>
                                 <p th:if="${#fields.hasErrors('firstName')}"
                                    th:errorclass="error"
                                     th:errors="*{firstName}" ></p>
-                                <input class="user_last_name membership_domain" type="text" th:field="*{lastName}"
-                                       placeholder="Last name" ><br>
+                                <p>Last name</p>
+                                <input class="user_last_name membership_domain" type="text" th:field="*{lastName}"><br>
                                 <p th:if="${#fields.hasErrors('lastName')}"
                                    th:errorclass="error"
                                    th:errors="*{lastName}" ></p>
-                                <input class="member_mail membership_domain" type="email" th:field="*{email}" placeholder="Email" ><br>
+                                <p>Email</p>
+                                <input class="member_mail membership_domain" type="email" th:field="*{email}"><br>
                                 <p th:if="${#fields.hasErrors('email')}"
                                    th:errorclass="error"
                                    th:errors="*{email}"></p>
+                                <p>Change password</p>
                                 <input class="user_password membership_domain" type="password" th:field="*{password}"
                                        placeholder="Password (At least 6 Characters)" ><br>
                                 <p th:if="${#fields.hasErrors('password')}"
@@ -64,9 +61,18 @@
                                 <p th:if="${#fields.hasErrors('confirmPassword')}"
                                    th:errorclass="error"
                                    th:errors="*{confirmPassword}" ></p>
-                                <button class="sign_up epey-authorisation" type="submit">Sign up</button>
                             </div>
+                            <button class="update_user" type="submit">Update</button>
                         </form>
+                        <form th:object="${registrationForm}" th:action="@{/deleteUser?id={id}(id=${registrationForm.id})}" th:method="delete">
+                            <button class="delete_user" type="submit">Delete</button>
+                        </form>
+                        <div class="content">
+                            <div th:if="${updated}">
+                                <p>You account updated</p>
+                            </div>
+                        </div>
+
                     </div>
                     <div id="subbarbutton">
                         <span class="show" onclick="comparison('show')"></span></div>

@@ -15,7 +15,7 @@
                 <div class="frame">
                     <div id="ust">
                         <div id="logo">
-                            <a href = "http://localhost:8082/index.html">
+                            <a href = "/index.html">
                                 <img alt="Epey Logo" src="https://resim.epey.com/tema/logo.png"></a>
                         </div>
                         <div id="search-box" class="search-key-box">
@@ -29,13 +29,16 @@
                         <div id="user_panel">
                             <div class="panelliste">
                                 <div sec:authorize="!isFullyAuthenticated()">
-                                    <a href="http://localhost:8082/login.html">
+                                    <a href="/login.html">
                                         <span class="sp1">Login</span>
                                     </a>
                                 </div>
                                 <div sec:authorize="isFullyAuthenticated()">
                                     <a href="/logout ">
                                         <span class="sp1">Logout</span>
+                                    </a>
+                                    <a href="/user.html">
+                                        <span class="sp1">Profile</span>
                                     </a>
                                 </div>
                             </div>
@@ -68,7 +71,3 @@
         </header>
     </body>
 </html>
-
-<!--<script>-->
-<!--    var extern = document.getElementsByTagName("footer")[0].import;-->
-<!--</script>-->

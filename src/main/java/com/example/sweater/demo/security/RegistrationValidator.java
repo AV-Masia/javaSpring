@@ -30,15 +30,17 @@ public class RegistrationValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.firstName");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.lastName");
-
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.email");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.password");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.confirmPassword");
 
         if (!this.emailValidator.isValid(registrationForm.getEmail())){
             errors.rejectValue("email", "Pattern.email");
-        } else if (userService.getUserByEmail(registrationForm.getEmail()) != null) {
-                errors.rejectValue("email", "Duplicate.email");
+        } else if (userService.getUserByEmail(registrationForm.getEmail()) != null && registrationForm.getId() == null) {
+            errors.rejectValue("email", "Duplicate.email");
+        }
+
+        if (registrationForm.getId() == null || !registrationForm.getPassword().isEmpty()) {
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.password");
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.confirmPassword");
         }
 
         if (!errors.hasErrors()) {

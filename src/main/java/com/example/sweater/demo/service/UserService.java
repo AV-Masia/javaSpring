@@ -6,11 +6,14 @@ import com.example.sweater.demo.model.form.RegistrationForm;
 public interface UserService {
 
     User getUserByEmail (String email);
+
     User getUserById(Long id);
 
     void createUserFromRegistrationForm(RegistrationForm registrationForm);
 
-//    void updateUser(User user);
-
     User updateUserPassword(String email);
+
+    void deleteUserById(Long id);
+
+    void updateUser(Long id, RegistrationForm registrationForm);
 }
