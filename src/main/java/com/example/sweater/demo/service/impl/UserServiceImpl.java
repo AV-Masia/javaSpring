@@ -1,17 +1,18 @@
 package com.example.sweater.demo.service.impl;
 
 import com.example.sweater.demo.email.EmailService;
-import com.example.sweater.demo.model.form.RegistrationForm;
 import com.example.sweater.demo.model.Role;
 import com.example.sweater.demo.model.User;
+import com.example.sweater.demo.model.form.RegistrationForm;
+import com.example.sweater.demo.repository.MovieRepository;
 import com.example.sweater.demo.repository.UserRepository;
+import com.example.sweater.demo.security.CryptConfiguration;
 import com.example.sweater.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.apache.commons.lang3.RandomStringUtils;
 
 @Slf4j
 @Service
@@ -21,14 +22,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private EmailService emailService;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private MovieRepository movieRepository;
+
+    @Autowired
+    private CryptConfiguration cryptConfiguration;
 
     @Autowired
     private UserRepository userRepository;
-
-    public UserServiceImpl() {
-        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    }
 
     @Override
     public User getUserByEmail(String email) {
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
                 .firstName(registrationForm.getFirstName())
                 .lastName(registrationForm.getLastName())
                 .email(registrationForm.getEmail())
-                .password(bCryptPasswordEncoder.encode(registrationForm.getPassword()))
+                .password(cryptConfiguration.passwordEncoder().encode(registrationForm.getPassword()))
                 .role(Role.USER)
                 .build();
             userRepository.save(user);
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
     public User updateUserPassword(String userEmail) {
         User user = getUserByEmail(userEmail);
         user.setPassword(generateRandomPassword());
-        userRepository.updateUserPassword(user.getId(), bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.updateUserPassword(user.getId(), cryptConfiguration.passwordEncoder().encode(user.getPassword()));
         return user;
     }
 
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService {
         user.setLastName(registrationForm.getLastName());
         user.setEmail(registrationForm.getEmail());
         if (!registrationForm.getPassword().isEmpty()){
-            user.setPassword(bCryptPasswordEncoder.encode(registrationForm.getPassword()));
+            user.setPassword(cryptConfiguration.passwordEncoder().encode(registrationForm.getPassword()));
         }
         userRepository.save(user);
     }

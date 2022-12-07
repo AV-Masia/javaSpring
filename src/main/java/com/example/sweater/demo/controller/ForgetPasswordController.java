@@ -6,7 +6,6 @@ import com.example.sweater.demo.model.form.ForgetPasswordForm;
 import com.example.sweater.demo.security.ForgetPasswordValidator;
 import com.example.sweater.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,10 +18,6 @@ import javax.validation.Valid;
 
 @Controller
 public class ForgetPasswordController {
-
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    private ForgetPasswordController(){ this.bCryptPasswordEncoder = new BCryptPasswordEncoder();}
 
     @Autowired
     private EmailService emailService;
