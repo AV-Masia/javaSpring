@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -23,15 +22,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtConfig jwtConfig;
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    private CryptConfiguration cryptConfiguration;
+
 
     @Override
-//    @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(cryptConfiguration.passwordEncoder());
     }
 
     @Override
@@ -39,15 +36,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        // The pages does not require login
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/logout", "/index", "/header", "/registration", "/user").permitAll()
-                .antMatchers("/deleteUser").hasAuthority("USER")
+                .antMatchers("/", "/login", "/logout", "/index", "/registration", "/user", "/reset").permitAll()
+                .antMatchers("/api/**", "/api/filter_movies").permitAll()
+                .antMatchers("/api/admin/**").permitAll()
+                .antMatchers("/deleteUser").permitAll()
                 .antMatchers( "/public/**","/templates/structure/**").permitAll()
-                        .antMatchers("/resources/**","/resources/js/**","/resources/css/**").permitAll()
-                        .antMatchers("/css/**", "/js/**", "**/favicon.ico").permitAll();
+                .antMatchers("/resources/**","/resources/js/**","/resources/css/**").permitAll()
+                .antMatchers("/css/**", "/js/**", "**/favicon.ico").permitAll();
 
-        // Config for Login Form
         http.authorizeRequests()
                 .and()
                 .formLogin()//
@@ -76,13 +73,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PersistentTokenRepository persistentTokenRepository() {
         return new InMemoryTokenRepositoryImpl();
     }
-
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        // Web resource
-//        web.ignoring().antMatchers("/resources/**");
-//        web.ignoring().antMatchers("/resources/static/**");
-//        web.ignoring().antMatchers("/resources/css/**");
-//        web.ignoring().antMatchers("/resources/js/**");
-//    }
 }
