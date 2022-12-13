@@ -57,7 +57,7 @@ public class UserController {
             model.addAttribute("registrationForm", registrationForm);
             return "user";
         }
-        userService.updateUser(registrationForm.getId(), registrationForm);
+        userService.updateUser(registrationForm);
         model.addAttribute("updated", true);
         return "user";
     }

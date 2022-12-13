@@ -4,7 +4,6 @@ import com.example.sweater.demo.email.EmailService;
 import com.example.sweater.demo.model.Role;
 import com.example.sweater.demo.model.User;
 import com.example.sweater.demo.model.form.RegistrationForm;
-import com.example.sweater.demo.repository.MovieRepository;
 import com.example.sweater.demo.repository.UserRepository;
 import com.example.sweater.demo.security.CryptConfiguration;
 import com.example.sweater.demo.service.UserService;
@@ -21,9 +20,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private EmailService emailService;
-
-    @Autowired
-    private MovieRepository movieRepository;
 
     @Autowired
     private CryptConfiguration cryptConfiguration;
@@ -65,7 +61,8 @@ public class UserServiceImpl implements UserService {
     public User updateUserPassword(String userEmail) {
         User user = getUserByEmail(userEmail);
         user.setPassword(generateRandomPassword());
-        userRepository.updateUserPassword(user.getId(), cryptConfiguration.passwordEncoder().encode(user.getPassword()));
+        userRepository.updateUserPassword(user.getId(),
+                cryptConfiguration.passwordEncoder().encode(user.getPassword()));
         return user;
     }
 
@@ -75,8 +72,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Long id, RegistrationForm registrationForm) {
-        User user = getUserById(id);
+    public void updateUser(RegistrationForm registrationForm) {
+        User user = userRepository.getById(registrationForm.getId());
         user.setFirstName(registrationForm.getFirstName());
         user.setLastName(registrationForm.getLastName());
         user.setEmail(registrationForm.getEmail());
@@ -86,7 +83,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    public static String generateRandomPassword() {
+    private String generateRandomPassword() {
         int len = 10;
         return RandomStringUtils.randomAlphanumeric(len);
     }
