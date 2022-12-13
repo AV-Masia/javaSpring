@@ -38,13 +38,8 @@ public class MovieServiceImpl implements MovieService {
     private GenreDeserializer genreDeserializer;
 
     @Override
-    public boolean createMovie(MovieForm movieForm) {
-        try {
-            movieRepository.save(buildMovieFromExternalForm(movieForm));
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+    public Movie createMovie(MovieForm movieForm) {
+           return  movieRepository.save(buildMovieFromExternalForm(movieForm));
     }
 
     @Override

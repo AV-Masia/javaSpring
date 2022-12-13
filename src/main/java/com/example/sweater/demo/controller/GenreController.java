@@ -5,10 +5,7 @@ import com.example.sweater.demo.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,19 +15,6 @@ public class GenreController {
     @Autowired
     private GenreService genreService;
 
-    @PostMapping("/api/admin/create_genre")
-    public ResponseEntity<String> createGenre(Genre genre) {
-        return genreService.create(genre)
-                ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @DeleteMapping("/api/admin/delete_genre/{id}")
-    public ResponseEntity<String> deleteGenre(Long id) {
-        return genreService.deleteGenreById(id)
-                ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 
     @GetMapping("/api/get_all_genres")
     public ResponseEntity<List<Genre>> getAllGenres() {
@@ -40,9 +24,32 @@ public class GenreController {
                 : ResponseEntity.internalServerError().build();
     }
 
-    @GetMapping("/api/get_genre/{id}")
-    public ResponseEntity<Genre> getGenreById(Long id) {
+    @GetMapping(value = "/api/get_genre")
+    public ResponseEntity<Genre> getGenreId(@RequestParam(value = "id", required = true)Long id) {
         Genre genre = genreService.getGenreById(id);
+        return genre != null
+                ? ResponseEntity.ok().body(genre)
+                : ResponseEntity.internalServerError().build();
+    }
+
+    @RequestMapping(value = "/api/admin/create_genre", method = RequestMethod.PUT, produces="application/json", consumes="application/json")
+    public ResponseEntity<Genre> createGenre(@RequestBody Genre genre) {
+        Genre genreEntity = genreService.create(genre);
+        return genreEntity != null
+                ? ResponseEntity.ok().body(genreEntity)
+                : ResponseEntity.internalServerError().build();
+    }
+
+    @DeleteMapping("/api/admin/delete_genre")
+    public ResponseEntity<String> deleteGenre(@RequestParam(value = "id", required = true) Long id) {
+        return genreService.deleteGenreById(id)
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @GetMapping(value = "/api/get_genre_by_name")
+    public ResponseEntity<Genre> getGenreName(@RequestParam(value = "name", required = true)String name) {
+        Genre genre = genreService.getGenreByName(name);
         return genre != null
                 ? ResponseEntity.ok().body(genre)
                 : ResponseEntity.internalServerError().build();

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MovieService {
 
-    boolean createMovie(MovieForm movieForm);
+    Movie createMovie(MovieForm movieForm);
 
     Movie updateMovie(MovieForm movieForm);
 

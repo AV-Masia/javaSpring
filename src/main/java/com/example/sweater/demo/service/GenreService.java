@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GenreService {
 
-    boolean create(Genre genre);
+    Genre create(Genre genre);
 
     boolean deleteGenreById(Long id);
 

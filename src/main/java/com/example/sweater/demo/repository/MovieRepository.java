@@ -11,4 +11,6 @@ public interface MovieRepository extends CrudRepository<Movie, Long> {
     @Query(value = "SELECT * FROM movies WHERE id=?1", nativeQuery = true)
     Movie getById(Long id);
 
+    Movie save(Movie movie);
+
 }

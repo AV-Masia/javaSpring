@@ -18,11 +18,12 @@ public class MoviesController {
     public MovieService movieService;
 
 
-    @PostMapping("/api/admin/create_movie")
-    public ResponseEntity<String> createGenre(MovieForm movieForm) {
-        return movieService.createMovie(movieForm)
-                ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @RequestMapping(value = "/api/create_movie", method = RequestMethod.PUT, produces="application/json", consumes="application/json")
+    public ResponseEntity<Movie> createMovie(@RequestBody MovieForm movieForm) {
+        Movie movie = movieService.createMovie(movieForm);
+        return movie != null
+                ? ResponseEntity.ok().body(movie)
+                : ResponseEntity.internalServerError().build();
     }
 
     @DeleteMapping("/api/admin/delete_movie")
@@ -38,10 +39,6 @@ public class MoviesController {
         return movie != null
                 ? ResponseEntity.ok().body(movie)
                 : ResponseEntity.internalServerError().build();
-
-//        movieService.updateMovie(movieForm);
-//        model.addAttribute("updated", true);M
-//        return "movie";
     }
 
     @GetMapping(value = "/api/get_movie")
@@ -59,6 +56,7 @@ public class MoviesController {
                 ? ResponseEntity.ok().body(movies)
                 : ResponseEntity.internalServerError().build();
     }
+
     @GetMapping(value = "/api/filter_movies")
     public ResponseEntity<List<Movie>> filterMoviesByGenre(@RequestParam(value = "genre", required = true) String string) {
         List<Movie> movies = movieService.filterMoviesByGenre(string);
@@ -66,8 +64,4 @@ public class MoviesController {
                 ? ResponseEntity.ok().body(movies)
                 : ResponseEntity.internalServerError().build();
     }
-
-
-
-
 }
