@@ -45,7 +45,6 @@ public class UserServiceImplTest {
 
     @Mock
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-//    = new BCryptPasswordEncoder();
 
     @Before
     public void setUp() {
@@ -180,8 +179,9 @@ public class UserServiceImplTest {
     }
 
     @Test
-    @Parameters(method = "paramsEmailUserAndEntityUser")
-    public void verifyGetUserByEmail(String email, User expectedUser) {
+    public void verifyGetUserByEmail() {
+        String email = "yakusik@mail.ru";
+        User expectedUser = testDataStorage.user1;
         when(userRepository.findByEmail(email)).thenReturn(expectedUser);
 
         User actual = userService.getUserByEmail(email);
@@ -198,7 +198,6 @@ public class UserServiceImplTest {
 
         verify(userRepository, times(1)).getById(1L);
         assertEquals(actual, testDataStorage.user1);
-
     }
 
     @Test
@@ -226,6 +225,21 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @Parameters(method = "paramsCreateUserFromRegisterForm")
+    public void createUser(RegistrationForm registrationForm, User actual, User expectedUser) throws MessagingException {
+        when(cryptConfiguration.passwordEncoder()).thenReturn(bCryptPasswordEncoder);
+        when(bCryptPasswordEncoder.encode(anyString())).thenReturn("qwerty2");
+        when(userRepository.save(any(User.class))).thenReturn(expectedUser);
+        doNothing().when(emailService).sendRegister(registrationForm.getFirstName(),
+                registrationForm.getEmail());
+
+        userService.createUserFromRegistrationForm(registrationForm);
+
+        verify(userRepository, times(1)).save(any(User.class));
+        assertEquals(actual, expectedUser);
+    }
+
+    @Test
     @Parameters(method = "paramsRegisterForm")
     public void updateUser(RegistrationForm registrationForm,  User actual, User expectedUser) {
         when(userRepository.getById(registrationForm.getId())).thenReturn(actual);
@@ -242,18 +256,5 @@ public class UserServiceImplTest {
 
     }
 
-    @Test
-    @Parameters(method = "paramsCreateUserFromRegisterForm")
-    public void verifyCreateUser(RegistrationForm registrationForm, User actual, User expectedUser) throws MessagingException {
-        when(cryptConfiguration.passwordEncoder()).thenReturn(bCryptPasswordEncoder);
-        when(bCryptPasswordEncoder.encode(anyString())).thenReturn("qwerty2");
-        when(userRepository.save(any(User.class))).thenReturn(expectedUser);
-        doNothing().when(emailService).sendRegister(registrationForm.getFirstName(),
-                registrationForm.getEmail());
 
-        userService.createUserFromRegistrationForm(registrationForm);
-
-        verify(userRepository, times(1)).save(any(User.class));
-        assertEquals(actual, expectedUser);
-    }
 }

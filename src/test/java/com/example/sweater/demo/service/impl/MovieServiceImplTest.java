@@ -47,6 +47,7 @@ public class MovieServiceImplTest {
         MockitoAnnotations.openMocks(this);
     }
 
+
     private static class TestDataStorage {
         Genre genre1 = Genre.builder().id(1L).name("Horrors").build();
         Genre genre2 = Genre.builder().id(2L).name("Drama").build();
@@ -58,7 +59,6 @@ public class MovieServiceImplTest {
                 .release_date("2018-02-07").poster_path("https://image.tmdb.org/t/p.jpg")
                 .overview("Believing they have left")
                 .budget(55000000).genres(genres).build();
-
         Movie movie2 = Movie.builder().id(2L).title("Something new")
                 .tagline("Do it").vote_average(8.5)
                 .vote_count(1195).runtime(90).revenue(136906000).release_date("2020-01-01")
@@ -78,7 +78,7 @@ public class MovieServiceImplTest {
                 .budget(22000000).genres(genres).build();
 
         List<Movie> movies1 = Lists.newArrayList(movie1, movie2);
-        List<Movie> movies2 = List.of(movie2);
+        List<Movie> movies2 = List.of(movie1);
 
         MovieForm movieForm1 = MovieForm.builder()
                 .title("Test title").tagline("Don't miss")
@@ -130,6 +130,12 @@ public class MovieServiceImplTest {
         };
     }
 
+    @Parameterized.Parameters
+    private Object[] paramsNameGenre() {
+        return new Object[][]{
+                {"Horrors",testDataStorage.genre1, testDataStorage.movies1}
+        };
+    }
     @Test
     @Parameters(method = "paramsMovies")
     public void verifyGetAllMovies(List<Movie> movies, List<Movie> expectedMovies) {
@@ -185,6 +191,17 @@ public class MovieServiceImplTest {
 
         verify(movieRepository, times(1)).save(expectedMovie);
         assertEquals(actual, expectedMovie);
+    }
+
+    @Test
+    @Parameters(method = "paramsNameGenre")
+    public void verifyFilterMoviesByName(String name, Genre genre, List<Movie> expectedMovies){
+        when(genreService.getGenreByName(name)).thenReturn(genre);
+        when(movieRepository.findAll()).thenReturn(expectedMovies);
+
+        List<Movie> actual = movieService.filterMoviesByGenre(name);
+        verify(movieRepository, times(1)).findAll();
+        assertEquals(actual, expectedMovies);
     }
 
 }

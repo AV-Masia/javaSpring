@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PageController {
 
-    @GetMapping(value = {"/", "/index1", "/index.html"})
+
+    @GetMapping(value = {"/", "/index.html"})
     public String getIndexPage(){
         return "index";
     }
+
 
     @GetMapping(value = {"/header.html"})
     public String getHeader(){
@@ -31,8 +33,9 @@ public class PageController {
 
     @RequestMapping("/login.html")
     public String login(@RequestParam(value = "error", required = false) String error, Model model) {
-        if (error != null)
+        if (error != null) {
             model.addAttribute("error1", true);
+        }
         return "login";
     }
 }

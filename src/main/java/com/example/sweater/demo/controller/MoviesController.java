@@ -46,7 +46,7 @@ public class MoviesController {
         Movie movie = movieService.getMovieById(id);
         return movie != null
                 ? ResponseEntity.ok().body(movie)
-                : ResponseEntity.internalServerError().build();
+                : ResponseEntity.noContent().build();
     }
 
     @GetMapping("/api/get_all_movies")
