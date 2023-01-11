@@ -1,8 +1,10 @@
 package fs.spring.vue.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -26,8 +28,9 @@ public class JwtTokenFilter extends GenericFilterBean {
 
         try {
             if(token != null && jwtTokenProvider.validateToken(token)) {
-                Authentication authentication = jwtTokenProvider.getAuthentication(token);
+                UsernamePasswordAuthenticationToken authentication = jwtTokenProvider.getAuthentication(token);
                 if(authentication != null) {
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails((HttpServletRequest)servletRequest));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }

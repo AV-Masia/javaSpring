@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.DELETE)
-    public String deleteUser(@RequestParam(value = "id", required = true) Long id) {
+    public String deleteUser(@RequestParam(value = "id") Long id) {
         if (id != null) {
             userService.deleteUserById(id);
         }

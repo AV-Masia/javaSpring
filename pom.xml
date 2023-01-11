@@ -8,8 +8,8 @@
     <artifactId>spring-vue</artifactId>
     <version>1.0.0</version>
     <modules>
-        <module>backend</module>
         <module>frontend</module>
+        <module>backend</module>
     </modules>
     <packaging>pom</packaging>
 
