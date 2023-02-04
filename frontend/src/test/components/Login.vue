@@ -10,7 +10,7 @@
 
       <!-- Login Form -->
       <form>
-        <input type="text" id="login" class="fadeIn second" name="login" v-model="user.login" placeholder="login">
+        <input type="text" id="username" class="fadeIn second" name="username" v-model="user.username" placeholder="username">
         <input type="text" id="password" class="fadeIn third" name="login" v-model="user.password"  placeholder="password">
         <button type="button" class="btn btn-primary" v-on:click="login()"> Log In </button>
       </form>
@@ -40,13 +40,13 @@
 
         data() {
             return {
-            user : { login: "", password: "" },
+            user : { username: "", password: "" },
             }
         },
 
         methods: {
 
-        login(){
+          login(){
 
             axios.post('/api/login', this.user)
                 .then(
@@ -61,7 +61,7 @@
                     console.log(error.data)
                 }
                 )
-            },
+          },
 
         }
     }

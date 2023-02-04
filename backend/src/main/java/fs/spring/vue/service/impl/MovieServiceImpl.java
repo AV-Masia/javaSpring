@@ -101,6 +101,16 @@ public class MovieServiceImpl implements MovieService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public boolean cleanMovies() {
+        try {
+            movieRepository.deleteAll();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
     private List<Movie> buildListMovies(List<Map<String, Object>> mapList) {
         return mapList.stream()
                 .map(this::createMovieFromData)

@@ -3,7 +3,7 @@ package fs.spring.vue.controller;
 import fs.spring.vue.model.form.LoginRequest;
 import fs.spring.vue.model.form.UserDTO;
 import fs.spring.vue.repository.UserRepository;
-import fs.spring.vue.security.JwtTokenProvider;
+import fs.spring.vue.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,7 +35,7 @@ public class LoginController {
     @PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> authenticate(@RequestBody @Valid LoginRequest request){
         try {
-            String login = request.getLogin();
+            String login = request.getUsername();
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, request.getPassword()));
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String token = jwtTokenProvider.createToken(login, userDetails.getAuthorities().stream().findFirst().get().getAuthority());
@@ -50,13 +50,14 @@ public class LoginController {
 //            return ResponseEntity.ok(response);
             return ResponseEntity.ok(new Object[]{userDTO, token});
         } catch (AuthenticationException e) {
-            return  new ResponseEntity<>("Invalid email/password combination: " + request.getLogin(), HttpStatus.FORBIDDEN);
+            return  new ResponseEntity<>("Invalid email/password combination: " + request.getUsername(), HttpStatus.FORBIDDEN);
         }
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response){
         SecurityContextLogoutHandler securityContextLogoutHandler = new SecurityContextLogoutHandler();
         securityContextLogoutHandler.logout(request, response, null);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

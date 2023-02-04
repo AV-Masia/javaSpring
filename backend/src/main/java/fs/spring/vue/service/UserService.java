@@ -13,7 +13,7 @@ public interface UserService {
 
     User updateUserPassword(String email);
 
-    void deleteUserById(Long id);
+    boolean deleteUserById(Long id);
 
     void updateUser(RegistrationForm registrationForm);
 }

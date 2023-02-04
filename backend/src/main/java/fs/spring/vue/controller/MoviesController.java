@@ -55,7 +55,7 @@ public class MoviesController {
                 : ResponseEntity.internalServerError().build();
     }
 
-    @GetMapping(value = "/api/filter_movies")
+    @GetMapping(value = "/api/filter_movies_by_genre")
     public ResponseEntity<List<Movie>> filterMoviesByGenre(@RequestParam(value = "genre", required = true) String string) {
         List<Movie> movies = movieService.filterMoviesByGenre(string);
         return movies != null

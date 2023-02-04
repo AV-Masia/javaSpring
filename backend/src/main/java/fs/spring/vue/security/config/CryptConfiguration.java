@@ -1,5 +1,4 @@
-package fs.spring.vue.security;
-
+package fs.spring.vue.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

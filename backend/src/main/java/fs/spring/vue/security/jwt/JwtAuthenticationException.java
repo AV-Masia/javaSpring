@@ -1,4 +1,4 @@
-package fs.spring.vue.security;
+package fs.spring.vue.security.jwt;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

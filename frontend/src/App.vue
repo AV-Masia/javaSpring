@@ -4,27 +4,11 @@
 
 <script>
 
-import axios from "axios";
-axios.defaults.baseURL = 'http://localhost:8080';
-
 export default {
 
     name: 'App',
-    components: {
-
-    },
-
-    computed:{
-      user(){ return this.$store.state.user },
-    },
-
     beforeMount(){
-      if(! this.user ||  Object.keys(this.user).length === 0 ) {
-        this.$router.push('/login')
-      } else {
-        this.$router.push('/home')
-      }
-        
+        this.$router.push('/index.html') 
     }
 
 }

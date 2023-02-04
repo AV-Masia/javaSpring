@@ -17,14 +17,14 @@ public class EmailConfigProperties {
 
     @Getter
     @Setter
-    public class Register{
+    public static class Register{
         private String subject;
         private String message;
     }
 
     @Getter
     @Setter
-    public class Reset{
+    public static class Reset{
         private String [] subject;
         private String [] message;
     }

@@ -5,7 +5,7 @@
 //import fs.spring.vue.model.User;
 //import fs.spring.vue.model.form.RegistrationForm;
 //import fs.spring.vue.repository.UserRepository;
-//import fs.spring.vue.security.CryptConfiguration;
+//import fs.spring.vue.security.config.CryptConfiguration;
 //import fs.spring.vue.service.UserService;
 //import junitparams.JUnitParamsRunner;
 //import junitparams.Parameters;

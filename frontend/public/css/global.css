@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    color: #333;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+#app {
+    display: contents;
+}
+
+main {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: red;
+}
+
+.content {
+    width: 970px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
