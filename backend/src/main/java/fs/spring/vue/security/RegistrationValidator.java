@@ -14,7 +14,7 @@ import org.springframework.validation.Validator;
 @ConfigurationProperties(prefix = "validation")
 public class RegistrationValidator implements Validator {
 
-    private EmailValidator emailValidator = EmailValidator.getInstance();
+    private final EmailValidator emailValidator = EmailValidator.getInstance();
 
     @Autowired
     private UserService userService;

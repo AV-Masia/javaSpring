@@ -1,8 +1,6 @@
 package fs.spring.vue.email;
 
 
-import fs.spring.vue.email.EmailConfigProperties;
-import fs.spring.vue.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -54,7 +52,6 @@ public class EmailServiceImpl implements EmailService {
             e.printStackTrace();
         }
         this.mailSender.send(mimeMessage);
-
     }
 
     @Override

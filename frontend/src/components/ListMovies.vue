@@ -1,5 +1,5 @@
 <template>
-  <div  class="list_movies">
+  <div class="list_movies">
     <Movie :movie="movie" v-for="movie in this.movies" :key="movie.id"></Movie>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
     movies: function () {
       return this.$store.state.movies;
     },
-  }
+  },
 };
 </script>
 

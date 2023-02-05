@@ -9,9 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix="mail")
 public class EmailConfigProperties {
 
-
     private String from;
-
     private Register register = new Register();
     private Reset reset = new Reset();
 

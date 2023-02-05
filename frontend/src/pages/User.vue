@@ -4,58 +4,63 @@
   <main>
     <form>
       <div id="authorisation">
-      <div></div>
+        <div></div>
 
-      <div class="message">{{ this.profile.firstName }}</div>
-      <input
-        type="text"
-        id="firstName"
-        class="user_first_name membership_domain"
-        name="firstName"
-        v-model="userUpdate.firstName"
-        placeholder="First name"
-      />
-      <div class="message">{{ this.profile.lastName }}</div>
-      <input
-        type="text"
-        id="lastName"
-        class="user_last_name membership_domain"
-        name="lastName"
-        v-model="userUpdate.lastName"
-        placeholder="Last name"
-      />
-      <div class="message">{{ this.profile.email }}</div>
-      <input
-        type="email"
-        id="email"
-        class="member_mail membership_domain"
-        name="email"
-        v-model="userUpdate.email"
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        id="password"
-        class="user_password membership_domain"
-        name="password"
-        v-model="userUpdate.password"
-        placeholder="Password"
-      />
-      <input
-        type="password"
-        id="confirmPassword"
-        class="user_password_again membership_domain"
-        name="confirmPassword"
-        v-model="userUpdate.confirmPassword"
-        placeholder="Password (At least 6 Characters)"
-      />
-      <button type="button" class="sign_up epey-authorisation" 
-      v-on:click="update()">Update</button>
-      <button type="button" class="sign_up epey-authorisation" 
-      v-on:click="deleteUser()">Delete</button>
-
-  </div>
-  </form>
+        <div class="message">{{ this.profile.firstName }}</div>
+        <input
+          type="text"
+          id="firstName"
+          class="user_first_name membership_domain"
+          name="firstName"
+          v-model="userUpdate.firstName"
+          placeholder="First name"
+        />
+        <div class="message">{{ this.profile.lastName }}</div>
+        <input
+          type="text"
+          id="lastName"
+          class="user_last_name membership_domain"
+          name="lastName"
+          v-model="userUpdate.lastName"
+          placeholder="Last name"
+        />
+        <div class="message">{{ this.profile.email }}</div>
+        <input
+          type="email"
+          id="email"
+          class="member_mail membership_domain"
+          name="email"
+          v-model="userUpdate.email"
+          placeholder="Email"
+        />
+        <input
+          type="password"
+          id="password"
+          class="user_password membership_domain"
+          name="password"
+          v-model="userUpdate.password"
+          placeholder="Password"
+        />
+        <input
+          type="password"
+          id="confirmPassword"
+          class="user_password_again membership_domain"
+          name="confirmPassword"
+          v-model="userUpdate.confirmPassword"
+          placeholder="Password (At least 6 Characters)"
+        />
+        <button type="button" class="sign_up user-authorisation" v-on:click="update()">
+          Update
+        </button>
+        <button
+          type="button"
+          class="sign_up user-authorisation"
+          v-on:click="deleteUser()"
+        >
+          Delete
+        </button>
+      </div>
+    </form>
   </main>
   <Footer></Footer>
 </template>
@@ -74,7 +79,7 @@ export default {
     Footer,
     Navbar,
   },
-  
+
   mounted() {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
     const accessToken = sessionStorage.getItem("accessToken");
@@ -97,12 +102,18 @@ export default {
       return this.$store.state.token;
     },
     userUpdate() {
-      return {id: this.profile.id, firstName: "", lastName: "", email: "", password: "", confirmPassword: ""}
-    }
+      return {
+        id: this.profile.id,
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      };
+    },
   },
 
   methods: {
-
     async getUserByName() {
       await axios({
         method: "get",
@@ -111,12 +122,12 @@ export default {
           userName: this.user.username,
         },
         headers: {
-            user: JSON.stringify(this.user),
-            Authorization: this.token,
-          }
+          user: JSON.stringify(this.user),
+          Authorization: this.token,
+        },
       })
         .then((result) => {
-          this.$store.commit("setProfile", result.data)
+          this.$store.commit("setProfile", result.data);
         })
         .catch((error) => {
           console.log(error.data);
@@ -124,10 +135,12 @@ export default {
     },
     update() {
       axios
-        .post("/api/user", this.userUpdate, {headers: {
+        .post("/api/user", this.userUpdate, {
+          headers: {
             user: JSON.stringify(this.user),
             Authorization: this.token,
-          }})
+          },
+        })
         .then((result) => {
           this.$store.commit("setProfile", result.data);
           return this.getUserByName();
@@ -137,18 +150,19 @@ export default {
         });
     },
     deleteUser() {
-       axios({
+      axios({
         method: "delete",
         url: "/api/deleteUser",
         params: {
           id: this.profile.id,
         },
         headers: {
-            user: JSON.stringify(this.user),
-            Authorization: this.token,
-          }
-      }).then(() => {
-        this.logout();
+          user: JSON.stringify(this.user),
+          Authorization: this.token,
+        },
+      })
+        .then(() => {
+          this.logout();
         })
         .catch((error) => {
           console.log(error.data);
@@ -170,37 +184,37 @@ export default {
         });
     },
   },
-}
+};
 </script>
 
 <style>
 #authorisation .active#registration:hover {
-        background: #D96142;
-        color: #FFF;
-    }
+  background: #d96142;
+  color: #fff;
+}
 
-    #authorisation .inactive#input:hover {
-        background: #D96142;
-        color: #FFF;
-    }
+#authorisation .inactive#input:hover {
+  background: #d96142;
+  color: #fff;
+}
 
-    #authorisation .active#registration {
-        font-size: 18px;
-        font-weight: 600;
-        padding: 10px 16px;
-        border: 1px solid #D96142;
-        border-radius: 3px;
-        background-color: #D96142;
-        color: #FFF;
-        cursor: default
-    }
+#authorisation .active#registration {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: 1px solid #d96142;
+  border-radius: 3px;
+  background-color: #d96142;
+  color: #fff;
+  cursor: default;
+}
 
-    #authorisation .inactive#input {
-        font-size: 18px;
-        font-weight: 600;
-        padding: 10px 52.5px;
-        border: 1px solid #D96142;
-        cursor: pointer;
-        border-radius: 3px
-    }
+#authorisation .inactive#input {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 52.5px;
+  border: 1px solid #d96142;
+  cursor: pointer;
+  border-radius: 3px;
+}
 </style>

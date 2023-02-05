@@ -6,8 +6,10 @@
           <div id="logo">
             <a href="#">
               <img
-                alt="Epey Logo"
-                src="https://resim.epey.com/tema/logo.png"
+                alt="Logo Logo"
+                src="/assets/logoIndex.png"
+                width="40"
+                height="40"
                 v-on:click="indexPage()"
               />
             </a>
@@ -21,10 +23,10 @@
                 value=""
                 name="search"
                 autocomplete="off"
-                placeholder="sitede search"
+                placeholder="site search"
               />
               <input type="hidden" name="floor" value="" />
-              <input type="submit" class="search" value="" />
+              <input  class="search" value="" />
             </form>
             <div class="callconclusion general_conclusion"></div>
           </div>
@@ -46,7 +48,7 @@
                   <span class="logout sp1">Logout</span>
                 </a>
                 <a href="#" v-on:click="userPage()">
-                  <span class="profile sp1" >Profile</span>
+                  <span class="profile sp1">Profile</span>
                 </a>
               </div>
             </div>
@@ -183,7 +185,7 @@ export default {
 
 #header #search-box .search {
   width: 70px;
-  height: 38px;
+  height: 28px;
   background: url(https://resim.epey.com/tema/aratmp.png) no-repeat center #d96142;
   cursor: pointer;
   margin: 1px 1px 0 0;

@@ -6,9 +6,7 @@
           <ul>
             <li class="level">
               <span class="s1">
-                <a class="level" v-on:click="getAllmovies()">
-                  All movies
-                </a>
+                <a class="level" v-on:click="getAllmovies()"> All movies </a>
               </span>
               <span class="brace">|</span>
             </li>

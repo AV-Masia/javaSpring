@@ -43,9 +43,14 @@
         v-model="user.confirmPassword"
         placeholder="Password (At least 6 Characters)"
       />
-      <button type="button" class="sign_up epey-authorisation" v-on:click="registration()">Registration</button>
+      <button
+        type="button"
+        class="sign_up user-authorisation"
+        v-on:click="registration()"
+      >
+        Registration
+      </button>
     </div>
-    
   </form>
 </template>
 
@@ -55,9 +60,7 @@ axios.defaults.baseURL = "http://localhost:8080";
 
 export default {
   name: "Registration",
-  components: { 
-    
-  },
+  components: {},
 
   data() {
     return {
@@ -70,8 +73,8 @@ export default {
       axios
         .post("/api/registration", this.user)
         .then(() => {
-          sessionStorage.setItem('firstName', this.user.firstName);
-          sessionStorage.setItem('lastName', this.user.lastName);
+          sessionStorage.setItem("firstName", this.user.firstName);
+          sessionStorage.setItem("lastName", this.user.lastName);
           this.$router.push("/success.html");
         })
         .catch((error) => {
@@ -83,33 +86,33 @@ export default {
 </script>
 
 <style>
-    #authorisation .active#registration:hover {
-        background: #D96142;
-        color: #FFF;
-    }
+#authorisation .active#registration:hover {
+  background: #d96142;
+  color: #fff;
+}
 
-    #authorisation .inactive#input:hover {
-        background: #D96142;
-        color: #FFF;
-    }
+#authorisation .inactive#input:hover {
+  background: #d96142;
+  color: #fff;
+}
 
-    #authorisation .active#registration {
-        font-size: 18px;
-        font-weight: 600;
-        padding: 10px 16px;
-        border: 1px solid #D96142;
-        border-radius: 3px;
-        background-color: #D96142;
-        color: #FFF;
-        cursor: default
-    }
+#authorisation .active#registration {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: 1px solid #d96142;
+  border-radius: 3px;
+  background-color: #d96142;
+  color: #fff;
+  cursor: default;
+}
 
-    #authorisation .inactive#input {
-        font-size: 18px;
-        font-weight: 600;
-        padding: 10px 52.5px;
-        border: 1px solid #D96142;
-        cursor: pointer;
-        border-radius: 3px
-    }
+#authorisation .inactive#input {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 52.5px;
+  border: 1px solid #d96142;
+  cursor: pointer;
+  border-radius: 3px;
+}
 </style>

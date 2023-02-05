@@ -28,7 +28,7 @@
       </div>
       <button
         type="button"
-        class="btn btn-primary authorisation epey-authorisation"
+        class="btn btn-primary authorisation user-authorisation"
         v-on:click="login()"
       >
         Log In

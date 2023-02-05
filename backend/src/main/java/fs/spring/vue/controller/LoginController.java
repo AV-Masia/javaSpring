@@ -39,15 +39,11 @@ public class LoginController {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, request.getPassword()));
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String token = jwtTokenProvider.createToken(login, userDetails.getAuthorities().stream().findFirst().get().getAuthority());
-//            Map<Object, Object> response = new HashMap<>();
-//            response.put("login", login);
-//            response.put("token", token);
 
             UserDTO userDTO = new UserDTO();
             userDTO.setUsername(userDetails.getUsername());
             userDTO.addRoles(userDetails.getAuthorities().stream().findFirst().get().getAuthority());
 
-//            return ResponseEntity.ok(response);
             return ResponseEntity.ok(new Object[]{userDTO, token});
         } catch (AuthenticationException e) {
             return  new ResponseEntity<>("Invalid email/password combination: " + request.getUsername(), HttpStatus.FORBIDDEN);

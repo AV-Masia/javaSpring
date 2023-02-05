@@ -21,14 +21,14 @@
                 <div v-if="message != ''" class="message">{{ message }}</div>
                 <button
                   type="button"
-                  class="btn btn-primary authorisation epey-authorisation"
+                  class="btn btn-primary authorisation user-authorisation"
                   v-on:click="uploadMovies()"
                 >
                   Upload movies
                 </button>
                 <button
                   type="button"
-                  class="btn btn-primary authorisation epey-authorisation"
+                  class="btn btn-primary authorisation user-authorisation"
                   v-on:click="deleteMovies()"
                 >
                   Clear movies

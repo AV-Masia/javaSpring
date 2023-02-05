@@ -1,42 +1,41 @@
 //package fs.spring.vue.controller;
 //
+//import com.fasterxml.jackson.databind.ObjectMapper;
 //import fs.spring.vue.model.Role;
 //import fs.spring.vue.model.User;
 //import fs.spring.vue.model.form.RegistrationForm;
 //import fs.spring.vue.service.UserService;
-//import com.fasterxml.jackson.databind.ObjectMapper;
 //import junitparams.JUnitParamsRunner;
 //import junitparams.Parameters;
 //import org.junit.*;
 //import org.junit.runner.RunWith;
 //import org.junit.runners.Parameterized;
+//import org.mockito.InjectMocks;
+//import org.mockito.Mock;
 //import org.mockito.MockitoAnnotations;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Qualifier;
 //import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.boot.test.mock.mockito.MockBean;
+//import org.springframework.http.MediaType;
 //import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.test.context.junit4.rules.SpringClassRule;
 //import org.springframework.test.context.junit4.rules.SpringMethodRule;
 //import org.springframework.test.context.web.WebAppConfiguration;
 //import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.ResultActions;
-//import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-//import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 //import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+//import org.springframework.validation.BeanPropertyBindingResult;
+//import org.springframework.validation.BindingResult;
+//import org.springframework.web.bind.WebDataBinder;
 //import org.springframework.web.context.WebApplicationContext;
 //
 //import javax.servlet.Filter;
-//import java.util.List;
-//import java.util.Objects;
 //
-//import static org.junit.Assert.*;
 //import static org.mockito.Mockito.*;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 //import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 //
 //
@@ -53,6 +52,18 @@
 //
 //    @MockBean
 //    private UserService userService;
+//
+//    @InjectMocks
+//    private UserController userController = new UserController();
+//
+//    @Mock
+//    private WebDataBinder webDataBinder;
+//
+//    @Mock
+//    private BeanPropertyBindingResult beanPropertyBindingResult;
+//
+//    @Mock
+//    private BindingResult bindingResult;
 //
 //    @Autowired
 //    private WebApplicationContext webApplicationContext;
@@ -82,14 +93,14 @@
 //    }
 //
 //    private static class TestDataStorage {
-//        User user1 = User.builder().id(1L).role(List.of(Role.ADMIN)).email("yakusik@mail.ru").password("111")
+//        User user1 = User.builder().id(1L).role(Role.ADMIN).email("yakusik@mail.ru").password("111")
 //                .firstName("Anastasia").lastName("Vasko")
 //                .credentialsNonExpired(true)
 //                .accountNonExpired(true)
 //                .accountNonLocked(true)
 //                .enabled(true)
 //                .build();
-//        User user2 = User.builder().id(2L).role(List.of(Role.USER)).email("petya@gmail.com").password("ytrewq")
+//        User user2 = User.builder().id(2L).role(Role.USER).email("petya@gmail.com").password("ytrewq")
 //                .firstName("Alena").lastName("Gurkova")
 //                .credentialsNonExpired(true)
 //                .accountNonExpired(true)
@@ -126,8 +137,8 @@
 //    @Parameterized.Parameters
 //    private Object[] paramsEmailUserAndEntityUser() {
 //        return new Object[][]{
-//                {"yakusik@mail.ru", testDataStorage.registrationFormUser1}
-////                {"petya@gmail.com", testDataStorage.registrationFormUser2}
+//                {"yakusik@mail.ru", testDataStorage.user1},
+//                {"petya@gmail.com", testDataStorage.user2}
 //        };
 //    }
 //
@@ -142,30 +153,26 @@
 //
 //    @Test
 //    @Parameters(method = "paramsEmailUserAndEntityUser")
-//    public void verifyGetUserByContext(String email, RegistrationForm expectedRF) throws Exception{
-//        when(userService.getUserByEmail(email)).thenReturn(testDataStorage.user1);
-//        ResultActions resultActions = mockMvc.perform(
-//                        get("/user.html")
-//                .with(SecurityRequestPostProcessors.userDetailsService(email))
-//                )
+//    public void verifyGetUserByContext(String email, User user) throws Exception{
+//        when(userService.getUserByEmail(email)).thenReturn(user);
+//        mockMvc.perform(get("/api/user").param("userName", String.valueOf(email)))
 //                .andDo(print())
-//                .andExpect(model().attributeExists("registrationForm"));
+//                .andExpect(status().isOk())
+//                .andExpect(content().json(objectMapper.writeValueAsString(user)));
 //
-//        RegistrationForm actualRF = (RegistrationForm) Objects.requireNonNull(resultActions.andReturn()
-//                .getModelAndView()).getModel().get("registrationForm");
-//
-//        verify(userService, times(1)).getUserByEmail(anyString());
-//        assertEquals(actualRF, expectedRF);
+//        verify(userService, times(1)).getUserByEmail(email);
 //    }
 //
 //    @Test
 //    public void verifyDeleteUser() throws Exception {
-//        long id = 5L;
-//        doNothing().when(userService).deleteUserById(id);
-//
+//        String email = "petya@gmail.com";
+//        Long id = 2L;
+//        when(userService.deleteUserById(id)).thenReturn(true);
 //        mockMvc.perform(
-//                        delete("/deleteUser").param("id", String.valueOf(id)))
-//                .andExpect(status().is3xxRedirection());
+//                        delete("/api/deleteUser")
+//                                .with(SecurityRequestPostProcessors.userDetailsService(email))
+//                                .param("id", String.valueOf(id)))
+//                .andExpect(status().is2xxSuccessful());
 //
 //        verify(userService, times(1)).deleteUserById(id);
 //    }
@@ -176,48 +183,31 @@
 //        doNothing().when(userService).updateUser(registrationForm);
 //        when(userService.getUserByEmail(registrationForm.getEmail())).thenReturn(user);
 //
-//        ResultActions result = mockMvc.perform(MockMvcRequestBuilders.put("/user.html")
-//                        .param("id", registrationForm.getId().toString())
-//                        .param("firstName",registrationForm.getFirstName())
-//                        .param("lastName",registrationForm.getLastName())
-//                        .param("email",registrationForm.getEmail())
-//                        .param("password",registrationForm.getPassword())
-//                        .param("confirmPassword",registrationForm.getConfirmPassword())
-//                        )
-//                .andExpect(model().attributeExists("updated"))
-//                .andExpect(MockMvcResultMatchers.view().name("user"));
-//
-//        boolean actualRF = (boolean) Objects.requireNonNull(result.andReturn()
-//                .getModelAndView()).getModel().get("updated");
+//                mockMvc.perform(post("/api/user")
+//                                .content(objectMapper.writeValueAsString(registrationForm))
+//                                .contentType(MediaType.APPLICATION_JSON))
+//                        .andExpect(status().is2xxSuccessful());
 //
 //        verify(userService, times(1)).updateUser(registrationForm);
-//        assertTrue(actualRF);
+//
 //    }
 //
 //    @Test
-//    public void verifyUpdateUser_status204() throws Exception {
-//
-//        RegistrationForm registrationForm = testDataStorage.registrationFormUser1;
+//    @Parameters(method = "paramsUpdateUser")
+//    public void verifyUpdateUser_status204(RegistrationForm registrationForm, User user) throws Exception {
 //        doNothing().when(userService).updateUser(registrationForm);
-//        when(userService.getUserByEmail(registrationForm.getEmail())).thenReturn(testDataStorage.user1);
+//        when(userService.getUserByEmail(registrationForm.getEmail())).thenReturn(user);
 //
-//        ResultActions result = mockMvc.perform(MockMvcRequestBuilders.put("/user.html")
-//                        .param("id", registrationForm.getId().toString())
-//                        .param("firstName",registrationForm.getFirstName())
-//                        .param("lastName",registrationForm.getLastName())
-//                        .param("email",registrationForm.getEmail())
-//                        .param("password",registrationForm.getPassword())
-//                        .param("confirmPassword",registrationForm.getConfirmPassword())
-//                )
-//                .andExpect(model().attributeExists("registrationForm"))
-//                .andExpect(MockMvcResultMatchers.view().name("user"));
+////        when(webDataBinder.getBindingResult()).thenReturn(result);
+//        when(beanPropertyBindingResult.hasErrors()).thenReturn(true);
 //
-//        RegistrationForm actualRF = (RegistrationForm) Objects.requireNonNull(result.andReturn()
-//                .getModelAndView()).getModel().get("registrationForm");
+//        mockMvc.perform(post("/api/user")
+//                        .content(objectMapper.writeValueAsString(registrationForm))
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().is5xxServerError());
 //
 //        verify(userService, times(1)).updateUser(registrationForm);
-//        assertEquals(actualRF, registrationForm);
-//    }
 //
+//    }
 //
 //}

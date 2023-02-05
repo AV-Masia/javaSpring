@@ -48,28 +48,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/index", "/index.html").permitAll()
             .antMatchers("/api/login", "/api/logout",
                     "/api/registration", "/api/get_all_genres",
-                    "/api/get_all_movies", "/api/filter_movies_by_genre").permitAll()
+                    "/api/get_all_movies", "/api/filter_movies_by_genre", "/api/admin/delete_genre", "/api/get_genre_by_name").permitAll()
             .antMatchers("/api/admin/upload_movies", "/api/admin/delete_all_movies").hasAuthority("ADMIN")
-                .antMatchers("/api/user", "/api/deleteUser").hasAnyAuthority("ADMIN","USER")
+//                .antMatchers("/api/user", "/api/deleteUser").hasAnyAuthority("ADMIN","USER")
+                .antMatchers("/api/user", "/api/deleteUser").permitAll()
             .antMatchers(
                     "/resources/**",
                     "/static/**",
                     "/css/**",
                     "/js/**",
-                    "/assets/logo.png",
+                    "/assets/**",
                     "/favicon.ico")
                 .permitAll()
             .anyRequest().authenticated();
-//        http
-////            .authorizeRequests()
-//////                .and().formLogin()
-////////                // Submit URL of login page.
-//////                .loginProcessingUrl("/j_spring_security_check") // Submit URL
-////////                .loginPage("/login")
-//////                .failureUrl("/login.html?error=true")
-//////                .usernameParameter("username").passwordParameter("password")
-////            .and()
-//            .logout().logoutUrl("/logout").logoutSuccessUrl("/index");
         http.apply(jwtConfig);
 
     }

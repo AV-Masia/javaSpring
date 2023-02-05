@@ -1,6 +1,5 @@
 package fs.spring.vue.controller;
 
-import fs.spring.vue.model.Genre;
 import fs.spring.vue.model.User;
 import fs.spring.vue.model.form.RegistrationForm;
 import fs.spring.vue.security.RegistrationValidator;
@@ -10,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +34,6 @@ public class UserController {
         binder.setValidator(registrationValidator);
     }
 
-
     @GetMapping(value = "/user")
     public ResponseEntity<User> getUser(@RequestParam(value = "userName", required = true)String userName) {
         User user = userService.getUserByEmail(userName);
@@ -47,15 +42,12 @@ public class UserController {
                 : ResponseEntity.internalServerError().build();
     }
 
-
-
     @DeleteMapping("/deleteUser")
-    public ResponseEntity<String> deleteUser(@RequestParam(value = "id", required = true) Long id) {
+    public ResponseEntity<String> deleteUser(@RequestParam(value = "id") Long id) {
         return userService.deleteUserById(id)
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 
     @PostMapping(value ="/user" , produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateUser(@RequestBody @Valid RegistrationForm registrationForm,

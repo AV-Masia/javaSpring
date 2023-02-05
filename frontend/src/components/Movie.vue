@@ -42,8 +42,7 @@ export default {
   data() {
     return {
       path:
-        this.movie.poster_path != null ? this.movie.poster_path 
-        : this.handleImageError(),
+        this.movie.poster_path != null ? this.movie.poster_path : this.handleImageError(),
     };
   },
   methods: {

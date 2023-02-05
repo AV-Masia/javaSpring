@@ -237,7 +237,7 @@
 //            }
 //
 //            Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-//            user.getRole().forEach(e-> grantedAuthorities.add(new SimpleGrantedAuthority(e.getName())));
+//             grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().name()));
 //
 //            return new org.springframework.security.core.userdetails.User(
 //                    user.getEmail(),
@@ -250,14 +250,14 @@
 //        }
 //
 //        private User findUserByEmail(String email) {
-//            User user1 = User.builder().id(1L).role(List.of(Role.ADMIN)).email("yakusik@mail.ru").password("111")
+//            User user1 = User.builder().id(1L).role(Role.ADMIN).email("yakusik@mail.ru").password("111")
 //                    .firstName("Sofia").lastName("Vasko")
 //                    .credentialsNonExpired(true)
 //                    .accountNonExpired(true)
 //                    .accountNonLocked(true)
 //                    .enabled(true)
 //                    .build();
-//            User user2 = User.builder().id(2L).role(List.of(Role.USER)).email("petya@gmail.com").password("ytrewq")
+//            User user2 = User.builder().id(2L).role(Role.USER).email("petya@gmail.com").password("ytrewq")
 //                    .firstName("Alena").lastName("Gurkova")
 //                    .credentialsNonExpired(true)
 //                    .accountNonExpired(true)

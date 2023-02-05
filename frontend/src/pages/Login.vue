@@ -28,7 +28,7 @@
               <div class="brace"></div>
               <a
                 style="float: none"
-                class="password_forget authorisation epey-authorisation"
+                class="password_forget authorisation user-authorisation"
                 href="/forgetPassword.html"
               >
                 I forgot my password
@@ -153,7 +153,7 @@ main .content {
   -webkit-border-radius: 3px;
 }
 
-#authorisation .epey-authorisation {
+#authorisation .user-authorisation {
   background-color: #d96142;
   border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -170,6 +170,7 @@ main .content {
   border: none;
   color: #fff;
   cursor: pointer;
+  background: #d96142;
 }
 
 label {
