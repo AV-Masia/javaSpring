@@ -5,7 +5,7 @@ import fs.spring.vue.model.Role;
 import fs.spring.vue.model.User;
 import fs.spring.vue.model.form.RegistrationForm;
 import fs.spring.vue.repository.UserRepository;
-import fs.spring.vue.security.CryptConfiguration;
+import fs.spring.vue.security.config.CryptConfiguration;
 import fs.spring.vue.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -67,8 +67,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
+    public boolean deleteUserById(Long id) {
+        try {
+            userRepository.deleteById(id);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

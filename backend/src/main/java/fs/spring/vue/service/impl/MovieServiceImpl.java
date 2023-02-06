@@ -1,5 +1,8 @@
 package fs.spring.vue.service.impl;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import fs.spring.vue.model.Genre;
 import fs.spring.vue.model.Movie;
 import fs.spring.vue.model.form.MovieForm;
@@ -7,9 +10,6 @@ import fs.spring.vue.repository.MovieRepository;
 import fs.spring.vue.service.GenreDeserializer;
 import fs.spring.vue.service.GenreService;
 import fs.spring.vue.service.MovieService;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.ResponseEntity;
@@ -101,6 +101,16 @@ public class MovieServiceImpl implements MovieService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public boolean cleanMovies() {
+        try {
+            movieRepository.deleteAll();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
     private List<Movie> buildListMovies(List<Map<String, Object>> mapList) {
         return mapList.stream()
                 .map(this::createMovieFromData)
@@ -116,6 +126,7 @@ public class MovieServiceImpl implements MovieService {
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         return mapper.convertValue(dataElement, Movie.class);
     }
+
     private Movie buildMovieFromExternalForm(MovieForm movieForm) {
         Set<Genre> genres = movieForm.getGenres()
                 .stream()
@@ -140,5 +151,4 @@ public class MovieServiceImpl implements MovieService {
         }
         return movie;
     }
-
 }

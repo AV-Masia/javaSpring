@@ -1,11 +1,10 @@
 package fs.spring.vue.service.impl;
 
 import fs.spring.vue.email.EmailService;
-import fs.spring.vue.model.Role;
 import fs.spring.vue.model.User;
 import fs.spring.vue.model.form.RegistrationForm;
 import fs.spring.vue.repository.UserRepository;
-import fs.spring.vue.security.CryptConfiguration;
+import fs.spring.vue.security.config.CryptConfiguration;
 import fs.spring.vue.service.UserService;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -23,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.mail.MessagingException;
 import java.util.List;
 
+import static fs.spring.vue.model.Role.USER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.*;
@@ -52,14 +52,14 @@ public class UserServiceImplTest {
     }
 
     private static class TestDataStorage {
-        User user1 = User.builder().id(1L).role(Role.USER).email("yakusik@mail.ru").password("111")
+        User user1 = User.builder().id(1L).role(USER).email("yakusik@mail.ru").password("111")
                 .firstName("Sofia").lastName("Vasko")
                 .credentialsNonExpired(true)
                 .accountNonExpired(true)
                 .accountNonLocked(true)
                 .enabled(true)
                 .build();
-        User user2 = User.builder().id(2L).role(Role.USER).email("petya@gmail.com").password("ytrewq")
+        User user2 = User.builder().id(2L).role(USER).email("petya@gmail.com").password("ytrewq")
                 .firstName("Alena").lastName("Gurkova")
                 .credentialsNonExpired(true)
                 .accountNonExpired(true)
@@ -99,7 +99,7 @@ public class UserServiceImplTest {
                 .confirmPassword("ytrewq")
                 .build();
 
-        User createUser1 = User.builder().id(1L).role(Role.USER)
+        User createUser1 = User.builder().id(1L).role(USER)
                 .email("yakusik@mail.ru").password("111")
                 .firstName("Sofia").lastName("Vasko")
                 .credentialsNonExpired(true)
@@ -107,7 +107,7 @@ public class UserServiceImplTest {
                 .accountNonLocked(true)
                 .enabled(true)
                 .build();
-        User createUser2 = User.builder().id(2L).role(Role.USER)
+        User createUser2 = User.builder().id(2L).role(USER)
                 .email("petya@gmail.com").password("ytrewq")
                 .firstName("Alena").lastName("Gurkova")
                 .credentialsNonExpired(true)
@@ -116,7 +116,7 @@ public class UserServiceImplTest {
                 .enabled(true)
                 .build();
 
-        User expectedUpdateUser1 = User.builder().id(1L).role(Role.USER)
+        User expectedUpdateUser1 = User.builder().id(1L).role(USER)
                 .email("yakusik@mail.ru").password("111")
                 .firstName("Anastasia").lastName("Vasko")
                 .credentialsNonExpired(true)
@@ -124,7 +124,7 @@ public class UserServiceImplTest {
                 .accountNonLocked(true)
                 .enabled(true)
                 .build();
-        User expectedUpdateUser2 = User.builder().id(2L).role(Role.USER)
+        User expectedUpdateUser2 = User.builder().id(2L).role(USER)
                 .email("petya@gmail.com").password("qwerty2")
                 .firstName("Sofia").lastName("Gurkova")
                 .credentialsNonExpired(true)
@@ -213,7 +213,6 @@ public class UserServiceImplTest {
         assertNotEquals(actual.getPassword(), oldPassword);
     }
 
-
     @Test
     public void verifyDeleteUserById() {
         doNothing().when(userRepository).deleteById(2L);
@@ -253,6 +252,4 @@ public class UserServiceImplTest {
 
 
     }
-
-
 }

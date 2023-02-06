@@ -20,4 +20,6 @@ public interface MovieService {
     boolean uploadMoviesFromExternalApi(String limit);
 
     List<Movie> filterMoviesByGenre(String string);
+
+    boolean cleanMovies();
 }

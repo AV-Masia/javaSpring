@@ -1,10 +1,10 @@
 package fs.spring.vue.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fs.spring.vue.model.Genre;
 import fs.spring.vue.model.Movie;
 import fs.spring.vue.model.form.MovieForm;
 import fs.spring.vue.service.MovieService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.assertj.core.util.Lists;
@@ -239,7 +239,7 @@ public class MoviesControllerTest {
     @Parameters(method = "paramsFilterMovies")
     public void verifyFilterMovies_status200(String name, List<Movie> movies) throws Exception {
         when(movieService.filterMoviesByGenre(any())).thenReturn(movies);
-        mockMvc.perform(get("/api/filter_movies").param("genre", String.valueOf(name)))
+        mockMvc.perform(get("/api/filter_movies_by_genre").param("genre", String.valueOf(name)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(movies)));

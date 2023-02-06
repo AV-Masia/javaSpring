@@ -24,7 +24,6 @@ import java.util.Set;
 @Builder(access = AccessLevel.PUBLIC)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode(exclude = "id")
-//@JsonDeserialize(builder = Movie.MovieBuilder.class)
 @Jacksonized
 public class Movie implements Serializable {
 

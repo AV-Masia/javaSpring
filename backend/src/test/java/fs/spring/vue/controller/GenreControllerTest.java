@@ -1,8 +1,8 @@
 package fs.spring.vue.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fs.spring.vue.model.Genre;
 import fs.spring.vue.service.GenreService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;

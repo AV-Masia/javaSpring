@@ -52,7 +52,6 @@ public class EmailServiceImpl implements EmailService {
             e.printStackTrace();
         }
         this.mailSender.send(mimeMessage);
-
     }
 
     @Override
