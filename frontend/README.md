@@ -49,3 +49,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     }
 
       :src="`${movie.poster_path}`"
+      
+   ### The project used a database from this resource
+   https://github.com/VarvaraZadnepriak/MoviesAPI.ReactJS.git
